@@ -1,5 +1,11 @@
 import random
 
+"""
+getStatblock()
+Takes the users choies of race, class, and strength/weakness.
+Randomly generates a statblock based on choices, plus specific bonuses based on race/class.
+Random distribution is higher if a strength, lower if a weakness.
+"""
 def getStatblock(choices, race, cls):
     # STR,DEX,CON,INT,WIS,CHA
     block = [0,0,0,0,0,0]
