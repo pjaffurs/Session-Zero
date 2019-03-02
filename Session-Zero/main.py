@@ -29,21 +29,22 @@ class Program(QtWidgets.QMainWindow):
         self.ui.buildBtn.clicked.connect(self.clickBuild)
         self.ui.wave1GenBtn.clicked.connect(self.clickGen)
         self.ui.wave1EndBtn.clicked.connect(self.wave1End)
+        self.ui.wave2Genbtn.clicked.connect(self.clickGen2)
 
     def clickBuild(self):
         self.ui.stackedWidget.setCurrentIndex(1)
 
-	"""
-	clickGen()
-	Takes the user's input of name, strengths, and weaknesses and passes it forward.
-	Populates three tables with generated statblocks.
-	"""
+    """
+    clickGen()
+    Takes the user's input of name, strengths, and weaknesses and passes it forward.
+    Populates three tables with generated statblocks.
+    """
     def clickGen(self):
         # get character name
         self.name = self.ui.nameEdit.text()
 		# return if name is blank
-		if name == '':
-			return
+        if name == '':
+            return
         # get chosen statistical strengths/weaknesses
         plusButtons = self.ui.statPlusGroup.buttons()
         minusButtons = self.ui.statMinusGroup.buttons()
@@ -74,27 +75,30 @@ class Program(QtWidgets.QMainWindow):
             
         self.ui.stackedWidget.setCurrentIndex(2)
       
-	"""
-	wave1End()
-	Finalizes the first wave of character creation, having built a statblock and character name/race/class
-	Moves the window forward to index 3
-	"""
+    """
+    wave1End()
+    Finalizes the first wave of character creation, having built a statblock and character name/race/class
+    Moves the window forward to index 3
+    """
     def wave1End(self):
-		blockChoices = self.ui.statblockGroup.buttons()
-		if blockChoices[0].isChecked():
-			chosen = self.ui.statblock1
-		elif blockChoices[1].isChecked():
-			chosen = self.ui.statblock2
-		else
-			chosen = self.ui.statblock3
-		
-		# populate stats with chosen statblock
-		for i in range(6):
-			self.stats = int(chosen.item(i, 1))
-			
-		# move to wave 2
+        blockChoices = self.ui.statblockGroup.buttons()
+        if blockChoices[0].isChecked():
+            chosen = self.ui.statblock1
+        elif blockChoices[1].isChecked():
+            chosen = self.ui.statblock2
+        else:
+            chosen = self.ui.statblock3
+
+        # populate stats with chosen statblock
+        for i in range(6):
+            self.stats = int(chosen.item(i, 1))
+
+        # move to wave 2
         self.ui.stackedWidget.setCurrentIndex(3)
 
+    def clickGen2(self):
+
+        self.ui.stackedWidget.setCurrentIndex(4)
 
 if __name__ == '__main__':
     
