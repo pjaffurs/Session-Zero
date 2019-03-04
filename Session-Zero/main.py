@@ -20,7 +20,9 @@ class Program(QtWidgets.QMainWindow):
         self.ui.setupUi(self)
         self.name = ''
         self.stats = [0,0,0,0,0,0]
-        print(self.stats)
+        self.traits = []
+        self.best = ''
+        self.worst =''
 
         #self.ui.label.setFont(QtGui.QFont('SansSerif', 30))
         #self.ui.label.setGeometry(QtCore.QRect(10, 10, 200, 200))
@@ -29,7 +31,11 @@ class Program(QtWidgets.QMainWindow):
         self.ui.buildBtn.clicked.connect(self.clickBuild)
         self.ui.wave1GenBtn.clicked.connect(self.clickGen)
         self.ui.wave1EndBtn.clicked.connect(self.wave1End)
-        self.ui.wave2Genbtn.clicked.connect(self.clickGen2)
+        self.ui.wave2GenBtn.clicked.connect(self.clickGen2)
+        self.ui.wave2EndBtn.clicked.connect(self.wave2End)
+        self.ui.addTraitBtn.clicked.connect(self.addTrait)
+        self.ui.delTraitBtn.clicked.connect(self.removeTraits)
+        self.ui.wave3Genbtn.clicked.connect(self.clickGen3)
 
     def clickBuild(self):
         self.ui.stackedWidget.setCurrentIndex(1)
@@ -37,13 +43,13 @@ class Program(QtWidgets.QMainWindow):
     """
     clickGen()
     Takes the user's input of name, strengths, and weaknesses and passes it forward.
-    Populates three tables with generated statblocks.
+    Populates three QTableWidgets with generated statblocks.
     """
     def clickGen(self):
         # get character name
         self.name = self.ui.nameEdit.text()
 		# return if name is blank
-        if name == '':
+        if self.name == '':
             return
         # get chosen statistical strengths/weaknesses
         plusButtons = self.ui.statPlusGroup.buttons()
@@ -91,14 +97,96 @@ class Program(QtWidgets.QMainWindow):
 
         # populate stats with chosen statblock
         for i in range(6):
-            self.stats = int(chosen.item(i, 1))
+            self.stats[i] = int(chosen.item(i, 1).text())
 
         # move to wave 2
         self.ui.stackedWidget.setCurrentIndex(3)
 
+    """
+    clickGen2()
+    Takes the user's choices of character traits and calls another function to generate new ones.
+    Populates an editable QListWidget with traits.
+    """
     def clickGen2(self):
+        # get greatest strengths/weaknesses
+        tmpTraits = []
+        bestList = self.ui.traitPlusGroup.buttons()
+        worstList = self.ui.traitMinusGroup.buttons()
+        for i in range(7):
+            if bestList[i].isChecked():
+                self.best = bestList[i].text().lower()
+            if worstList[i].isChecked():
+                self.worst = worstList[i].text().lower()
 
+        print(self.best)
+        print(self.worst)
+        groups = [self.ui.braveGroup.buttons(), self.ui.careGroup.buttons(), self.ui.friendGroup.buttons(), self.ui.honestGroup.buttons(), self.ui.humbleGroup.buttons(), self.ui.modestGroup.buttons(), 
+                  self.ui.moneyGroup.buttons(), self.ui.patientGroup.buttons(), self.ui.senseGroup.buttons()]
+        
+        # populate traits for randomization
+        for btns in groups:
+            for i in range(3):
+                if btns[i].isChecked():
+                    tmpTraits.append(btns[i].text().lower())
+                    break
+        
+        # generate additional traits and populate list
+        #for t in algs.getTraits(self.best, self.worst, tmpTraits, self.stats):
+        self.ui.listWidget.addItems(algs.getTraits(self.best, self.worst, tmpTraits, self.stats))
+
+        # populate lists with generated traits
         self.ui.stackedWidget.setCurrentIndex(4)
+
+    """
+    wave2End()
+    Finishes the second wave of second wave of character creation, adding the primary set of traits to the character.
+    Moves the window ahead to index 5.
+    """
+    def wave2End(self):
+        # take values from listWidget and add to traits
+        for i in range(self.ui.listWidget.count()):
+            self.traits.append(self.ui.listWidget.item(i).text())
+
+        self.ui.stackedWidget.setCurrentIndex(5)
+
+    """
+    addTrait()
+    Prompts the user to add a new trait to the list in Wave 2, then adds it if valid.
+    """
+    def addTrait(self):
+        text, ok = QtWidgets.QInputDialog.getText(self, 'Input Dialog', 'Enter the new trait:')
+
+        if ok:
+            self.ui.listWidget.addItem(text)
+
+    """
+    removeTraits()
+    Deletes the selected traits from the trait list in Wave 2.
+    """
+    def removeTraits(self):
+        for item in self.ui.listWidget.selectedItems():
+            self.ui.listWidget.takeItem(self.ui.listWidget.row(item))
+
+    """
+    clickGen3()
+    Takes the user's choices of background and motivation and generates a series of backstories following it, as well as adds new traits to the list.
+    Places the backstories in the next window for the user to select.
+    """
+    def clickGen3(self):
+        # create list of background choices
+        background = []
+        
+        background.append(self.ui.familyBox.currentText())
+        background.append(self.ui.childBox.currentText())
+        background.append(self.ui.envBox.currentText())
+        background.append(self.ui.socialBox.currentText())
+        background.append(self.ui.rolemodelBox.currentText())
+        background.append(self.ui.memBox.currentText())
+        background.append(self.ui.goalBox.currentText())
+
+        txt = algs.getBackground(background, self.traits, self.stats)
+
+        self.ui.stackedWidget.setCurrentIndex(6)
 
 if __name__ == '__main__':
     
