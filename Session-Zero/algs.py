@@ -1,4 +1,7 @@
 import random
+# algs.py
+# This file holds the non member-functions used for this project, mostly for calculations and generations of stats.
+# It also holds several tables/mappings of strings in dicts, which in the future would be moved to a database.
 
 traitMap = {'loyalty':['loyal','honorable','faithful','positive','reliable','consistent','honest'],
             'compassion':['kind','empathetic','courteous','altruistic','helpful','forgiving','selfless'],
@@ -20,6 +23,50 @@ traitMap = {'loyalty':['loyal','honorable','faithful','positive','reliable','con
             'dexterity':['agile','quick-witted','hyperactive','reactive','adaptive','coordinated','calm'],
             'strength':['strong','willful','confident','loud','boisterous','positive','active','assertive'],
             'constitution':['hearty','quiet','resilient','stubborn','gregarious','healthy','lively']}
+
+skills = {'Acrobatics':1,
+          'Appraise':5,
+          'Bluff':5,
+          'Climb':0,
+          'Craft':3,
+          'Diplomacy':5,
+          'Disable Device':1,
+          'Disguise':5,
+          'Escape Artist':1,
+          'Fly':1,
+          'Handle Animal':5,
+          'Heal':4,
+          'Intimidate':5,
+          'Knowledge':3,
+          'Linguistics':3,
+          'Perception':4,
+          'Perform':5,
+          'Profession':4,
+          'Ride':1,
+          'Sense Motive':4,
+          'Sleight of Hand':1,
+          'Spellcraft':3,
+          'Stealth':1,
+          'Survival':4,
+          'Swim':0,
+          'Use Magic Device':5}
+
+classSkills = {'Adept':['Craft','Handle Animal','Heal','Knowledge','Profession','Spellcraft','Survival'],
+               'Aristocrat':['Appraise', 'Bluff','Craft','Diplomacy','Disguise','Handle Animal','Intimidate','Knowledge','Linguistics','Perception','Perform','Profession','Ride','Sense Motive','Swim','Survival'],
+               'Barbarian':['Acrobatics','Climb','Craft','Handle Animal','Intimidate','Knowledge','Perception','Ride','Survival','Swim'],
+               'Bard':['Acrobatics','Appraise','Bluff','Climb','Craft','Diplomacy','Disguise','Escape Artist','Intimidate','Knowledge','Linguistics','Perception','Perform','Profession','Sense Motive','Sleight of Hand','Spellcraft','Stealth','Use Magic Device'],
+               'Cleric':['Appraise','Craft','Diplomacy','Heal','Knowledge','Linguistics','Profession','Sense Motive','Spellcraft'],
+               'Commoner':['Climb','Craft','Handle Animal','Perception','Profession','Ride','Swim'],
+               'Druid':['Climb','Craft','Fly','Handle Animal','Heal','Knowledge','Perception','Profession','Ride','Spellcraft','Survival','Swim'],
+               'Expert':['Appraise','Craft''Profession'],
+               'Fighter':['Climb','Craft','Handle Animal','Intimidate','Knowledge','Profession','Ride','Survival','Swim'],
+               'Monk':['Acrobatics','Climb','Craft','Escape Artist','Intimidate','Knowledge','Perception','Perform','Profession','Ride','Sense Motive','Stealth','Swim'],
+               'Paladin':['Craft','Diplomacy','Handle Animal','Heal','Knowledge','Profession','Ride','Sense Motive','Spellcraft'],
+               'Ranger':['Climb','Craft','Handle Animal','Heal','Intimidate','Knowledge','Perception','Profession','Ride','Spellcraft','Stealth','Survival','Swim'],
+               'Rogue':['Acrobatics','Appraise','Bluff','Climb','Craft','Diplomacy','Disable Device','Disguise','Escape Artist','Intimidate','Knowledge','Linguistics','Perception','Perform','Profession','Sense Motive','Sleight of Hand','Stealth','Swim','Use Magic Device'],
+               'Sorcerer':['Appraise','Bluff','Craft','Fly','Intimidate','Knowledge','Profession','Spellcraft','Use Magic Device'],
+               'Warrior':['Climb','Craft','Handle Animal','Intimidate','Profession','Ride','Swim'],
+               'Wizard':['Appraise','Craft','Fly','Knowledge','Linguistics','Profession','Spellcraft']}
 
 """
 getStatblock()
@@ -165,5 +212,6 @@ getBackground()
 Takes the user's choices of background features and motive, expanding on them to create a short textual background.
 Adds new traits to the user's traits, while also expanding on some of them in the background.
 """
-def getBackground(choices, traits, stats):
+def getBackground(choices, traits, stats, cls):
+
     return

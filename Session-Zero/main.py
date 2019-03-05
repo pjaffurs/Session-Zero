@@ -23,10 +23,11 @@ class Program(QtWidgets.QMainWindow):
         self.traits = []
         self.best = ''
         self.worst =''
+        self.cls = ''
+        self.alignment = ''
 
         #self.ui.label.setFont(QtGui.QFont('SansSerif', 30))
         #self.ui.label.setGeometry(QtCore.QRect(10, 10, 200, 200))
-        #self.ui.label.setText('Eat ass')
 
         self.ui.buildBtn.clicked.connect(self.clickBuild)
         self.ui.wave1GenBtn.clicked.connect(self.clickGen)
@@ -36,6 +37,7 @@ class Program(QtWidgets.QMainWindow):
         self.ui.addTraitBtn.clicked.connect(self.addTrait)
         self.ui.delTraitBtn.clicked.connect(self.removeTraits)
         self.ui.wave3Genbtn.clicked.connect(self.clickGen3)
+        self.ui.finishButton.clicked.connect(self.genCharacter)
 
     def clickBuild(self):
         self.ui.stackedWidget.setCurrentIndex(1)
@@ -48,6 +50,7 @@ class Program(QtWidgets.QMainWindow):
     def clickGen(self):
         # get character name
         self.name = self.ui.nameEdit.text()
+        self.cls = self.ui.classBox.currentText()
 		# return if name is blank
         if self.name == '':
             return
@@ -68,7 +71,7 @@ class Program(QtWidgets.QMainWindow):
 
         # generate 3 statblocks
         for i in range(3):
-            tempBlocks.append(algs.getStatblock(choices, self.ui.raceBox.currentText(), self.ui.classBox.currentText()))
+            tempBlocks.append(algs.getStatblock(choices, self.ui.raceBox.currentText(), self.cls))
             print(tempBlocks[i])
 
         
@@ -183,10 +186,23 @@ class Program(QtWidgets.QMainWindow):
         background.append(self.ui.rolemodelBox.currentText())
         background.append(self.ui.memBox.currentText())
         background.append(self.ui.goalBox.currentText())
+        background.append(self.ui.ageBox.currentText())
 
-        txt = algs.getBackground(background, self.traits, self.stats)
+        # adds three distinct textual backgrounds to the three text boxes
+        self.ui.text1.insertPlainText(algs.getBackground(background, self.traits, self.stats, self.cls))
+        self.ui.text2.insertPlainText(algs.getBackground(background, self.traits, self.stats, self.cls))
+        self.ui.text3.insertPlainText(algs.getBackground(background, self.traits, self.stats, self.cls))
 
         self.ui.stackedWidget.setCurrentIndex(6)
+
+    """
+    genCharacter()
+    Generates the full character according the the user's choices from the threee waves of questions and selections.
+    Populates the various fields with stats, backstory, skills, and basic information.
+    """
+    def genCharacter(self):
+
+        self.ui.stackedWidget.setCurrentIndex(7)
 
 if __name__ == '__main__':
     

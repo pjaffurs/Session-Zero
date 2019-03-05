@@ -28,13 +28,6 @@
       </property>
      </spacer>
     </item>
-    <item row="0" column="3">
-     <widget class="Line" name="line_7">
-      <property name="orientation">
-       <enum>Qt::Vertical</enum>
-      </property>
-     </widget>
-    </item>
     <item row="0" column="1">
      <widget class="Line" name="line_6">
       <property name="orientation">
@@ -58,7 +51,7 @@
     <item row="0" column="2">
      <widget class="QStackedWidget" name="stackedWidget">
       <property name="currentIndex">
-       <number>5</number>
+       <number>7</number>
       </property>
       <widget class="QWidget" name="startPage">
        <layout class="QGridLayout" name="gridLayout_2">
@@ -132,15 +125,15 @@
        </layout>
       </widget>
       <widget class="QWidget" name="wave1Page1">
-       <layout class="QGridLayout" name="gridLayout_3">
-        <item row="3" column="1">
-         <widget class="QLineEdit" name="nameEdit">
-          <property name="maxLength">
-           <number>25</number>
+       <layout class="QFormLayout" name="formLayout">
+        <item row="1" column="0" colspan="2">
+         <widget class="Line" name="line_2">
+          <property name="orientation">
+           <enum>Qt::Horizontal</enum>
           </property>
          </widget>
         </item>
-        <item row="3" column="0">
+        <item row="2" column="0">
          <widget class="QLabel" name="nameLabel">
           <property name="text">
            <string>Name:</string>
@@ -150,6 +143,13 @@
           </property>
           <property name="buddy">
            <cstring>nameEdit</cstring>
+          </property>
+         </widget>
+        </item>
+        <item row="2" column="1">
+         <widget class="QLineEdit" name="nameEdit">
+          <property name="maxLength">
+           <number>25</number>
           </property>
          </widget>
         </item>
@@ -202,7 +202,7 @@
           </item>
          </widget>
         </item>
-        <item row="5" column="0">
+        <item row="6" column="0">
          <widget class="QLabel" name="classLabel">
           <property name="text">
            <string>Class: </string>
@@ -212,7 +212,7 @@
           </property>
          </widget>
         </item>
-        <item row="5" column="1">
+        <item row="6" column="1">
          <widget class="QComboBox" name="classBox">
           <item>
            <property name="text">
@@ -296,7 +296,7 @@
           </item>
          </widget>
         </item>
-        <item row="6" column="0">
+        <item row="8" column="0">
          <widget class="QLabel" name="statsPlusLabel">
           <property name="text">
            <string>Quantitative Strengths:</string>
@@ -306,17 +306,7 @@
           </property>
          </widget>
         </item>
-        <item row="7" column="0">
-         <widget class="QLabel" name="statsMinusLabel">
-          <property name="text">
-           <string>Quantitative Weaknesses:</string>
-          </property>
-          <property name="alignment">
-           <set>Qt::AlignLeading|Qt::AlignLeft|Qt::AlignTop</set>
-          </property>
-         </widget>
-        </item>
-        <item row="6" column="1">
+        <item row="8" column="1">
          <layout class="QVBoxLayout" name="verticalLayout">
           <item>
            <widget class="QCheckBox" name="checkBox_2">
@@ -380,7 +370,17 @@
           </item>
          </layout>
         </item>
-        <item row="7" column="1">
+        <item row="10" column="0">
+         <widget class="QLabel" name="statsMinusLabel">
+          <property name="text">
+           <string>Quantitative Weaknesses:</string>
+          </property>
+          <property name="alignment">
+           <set>Qt::AlignLeading|Qt::AlignLeft|Qt::AlignTop</set>
+          </property>
+         </widget>
+        </item>
+        <item row="10" column="1">
          <layout class="QVBoxLayout" name="verticalLayout_2">
           <item>
            <widget class="QCheckBox" name="checkBox_8">
@@ -444,21 +444,7 @@
           </item>
          </layout>
         </item>
-        <item row="2" column="0" colspan="2">
-         <widget class="Line" name="line_2">
-          <property name="orientation">
-           <enum>Qt::Horizontal</enum>
-          </property>
-         </widget>
-        </item>
-        <item row="8" column="1">
-         <widget class="QPushButton" name="wave1GenBtn">
-          <property name="text">
-           <string>Generate Statblock</string>
-          </property>
-         </widget>
-        </item>
-        <item row="1" column="0" colspan="2">
+        <item row="0" column="0" colspan="2">
          <widget class="QLabel" name="wave1Label">
           <property name="text">
            <string>Basic Character Information</string>
@@ -468,28 +454,104 @@
           </property>
          </widget>
         </item>
+        <item row="11" column="1">
+         <spacer name="verticalSpacer_13">
+          <property name="orientation">
+           <enum>Qt::Vertical</enum>
+          </property>
+          <property name="sizeHint" stdset="0">
+           <size>
+            <width>20</width>
+            <height>40</height>
+           </size>
+          </property>
+         </spacer>
+        </item>
+        <item row="9" column="0">
+         <spacer name="verticalSpacer_14">
+          <property name="orientation">
+           <enum>Qt::Vertical</enum>
+          </property>
+          <property name="sizeHint" stdset="0">
+           <size>
+            <width>20</width>
+            <height>40</height>
+           </size>
+          </property>
+         </spacer>
+        </item>
+        <item row="7" column="0">
+         <spacer name="verticalSpacer_15">
+          <property name="orientation">
+           <enum>Qt::Vertical</enum>
+          </property>
+          <property name="sizeHint" stdset="0">
+           <size>
+            <width>20</width>
+            <height>40</height>
+           </size>
+          </property>
+         </spacer>
+        </item>
+        <item row="12" column="0" colspan="2">
+         <widget class="QPushButton" name="wave1GenBtn">
+          <property name="text">
+           <string>Generate Statblock</string>
+          </property>
+         </widget>
+        </item>
+        <item row="5" column="0">
+         <spacer name="verticalSpacer_16">
+          <property name="orientation">
+           <enum>Qt::Vertical</enum>
+          </property>
+          <property name="sizeHint" stdset="0">
+           <size>
+            <width>20</width>
+            <height>40</height>
+           </size>
+          </property>
+         </spacer>
+        </item>
+        <item row="3" column="0">
+         <spacer name="verticalSpacer_17">
+          <property name="orientation">
+           <enum>Qt::Vertical</enum>
+          </property>
+          <property name="sizeHint" stdset="0">
+           <size>
+            <width>20</width>
+            <height>40</height>
+           </size>
+          </property>
+         </spacer>
+        </item>
        </layout>
       </widget>
       <widget class="QWidget" name="wave1Results">
        <layout class="QGridLayout" name="gridLayout_4">
-        <item row="4" column="0">
-         <widget class="QRadioButton" name="selectBtn2">
+        <item row="0" column="0" colspan="2">
+         <widget class="QLabel" name="genLabel">
           <property name="text">
-           <string>Select</string>
+           <string>Basic Character Information</string>
           </property>
-          <attribute name="buttonGroup">
-           <string notr="true">statblockGroup</string>
-          </attribute>
+          <property name="alignment">
+           <set>Qt::AlignCenter</set>
+          </property>
          </widget>
         </item>
-        <item row="5" column="0">
-         <widget class="QRadioButton" name="selectBtn3">
-          <property name="text">
-           <string>Select</string>
+        <item row="1" column="0" colspan="2">
+         <widget class="Line" name="line_3">
+          <property name="orientation">
+           <enum>Qt::Horizontal</enum>
           </property>
-          <attribute name="buttonGroup">
-           <string notr="true">statblockGroup</string>
-          </attribute>
+         </widget>
+        </item>
+        <item row="2" column="0" colspan="2">
+         <widget class="QLabel" name="statblockLabel">
+          <property name="text">
+           <string>Select the statblock that fits your character best</string>
+          </property>
          </widget>
         </item>
         <item row="3" column="0">
@@ -587,6 +649,16 @@
           </item>
          </widget>
         </item>
+        <item row="4" column="0">
+         <widget class="QRadioButton" name="selectBtn2">
+          <property name="text">
+           <string>Select</string>
+          </property>
+          <attribute name="buttonGroup">
+           <string notr="true">statblockGroup</string>
+          </attribute>
+         </widget>
+        </item>
         <item row="4" column="1">
          <widget class="QTableWidget" name="statblock2">
           <property name="editTriggers">
@@ -672,6 +744,16 @@
             <string>Charisma</string>
            </property>
           </item>
+         </widget>
+        </item>
+        <item row="5" column="0">
+         <widget class="QRadioButton" name="selectBtn3">
+          <property name="text">
+           <string>Select</string>
+          </property>
+          <attribute name="buttonGroup">
+           <string notr="true">statblockGroup</string>
+          </attribute>
          </widget>
         </item>
         <item row="5" column="1">
@@ -765,30 +847,6 @@
          <widget class="QPushButton" name="wave1EndBtn">
           <property name="text">
            <string>Continue</string>
-          </property>
-         </widget>
-        </item>
-        <item row="2" column="0" colspan="2">
-         <widget class="QLabel" name="statblockLabel">
-          <property name="text">
-           <string>Select the statblock that fits your character best</string>
-          </property>
-         </widget>
-        </item>
-        <item row="1" column="0" colspan="2">
-         <widget class="Line" name="line_3">
-          <property name="orientation">
-           <enum>Qt::Horizontal</enum>
-          </property>
-         </widget>
-        </item>
-        <item row="0" column="0" colspan="2">
-         <widget class="QLabel" name="genLabel">
-          <property name="text">
-           <string>Basic Character Information</string>
-          </property>
-          <property name="alignment">
-           <set>Qt::AlignCenter</set>
           </property>
          </widget>
         </item>
@@ -1396,13 +1454,6 @@
           </property>
          </widget>
         </item>
-        <item row="0" column="0">
-         <widget class="QLabel" name="label">
-          <property name="text">
-           <string>Personality Traits</string>
-          </property>
-         </widget>
-        </item>
         <item row="1" column="0" colspan="2">
          <widget class="Line" name="line_9">
           <property name="orientation">
@@ -1437,10 +1488,27 @@
           </property>
          </widget>
         </item>
+        <item row="0" column="0" colspan="2">
+         <widget class="QLabel" name="label">
+          <property name="text">
+           <string>Personality Traits</string>
+          </property>
+          <property name="alignment">
+           <set>Qt::AlignCenter</set>
+          </property>
+         </widget>
+        </item>
        </layout>
       </widget>
       <widget class="QWidget" name="wave3Page1">
        <layout class="QGridLayout" name="gridLayout_7">
+        <item row="19" column="0" colspan="2">
+         <widget class="QPushButton" name="wave3Genbtn">
+          <property name="text">
+           <string>Generate Background</string>
+          </property>
+         </widget>
+        </item>
         <item row="4" column="0">
          <spacer name="verticalSpacer_5">
           <property name="orientation">
@@ -1453,13 +1521,6 @@
            </size>
           </property>
          </spacer>
-        </item>
-        <item row="0" column="0">
-         <widget class="QLabel" name="label_3">
-          <property name="text">
-           <string>Character Background and Motive</string>
-          </property>
-         </widget>
         </item>
         <item row="5" column="0">
          <widget class="QLabel" name="label_5">
@@ -1864,6 +1925,45 @@
           </property>
          </spacer>
         </item>
+        <item row="17" column="1">
+         <widget class="QComboBox" name="ageBox">
+          <item>
+           <property name="text">
+            <string>child</string>
+           </property>
+          </item>
+          <item>
+           <property name="text">
+            <string>adolescent</string>
+           </property>
+          </item>
+          <item>
+           <property name="text">
+            <string>adult</string>
+           </property>
+          </item>
+          <item>
+           <property name="text">
+            <string>middle-aged</string>
+           </property>
+          </item>
+          <item>
+           <property name="text">
+            <string>old</string>
+           </property>
+          </item>
+          <item>
+           <property name="text">
+            <string>venerable</string>
+           </property>
+          </item>
+          <item>
+           <property name="text">
+            <string>immortal</string>
+           </property>
+          </item>
+         </widget>
+        </item>
         <item row="12" column="0">
          <spacer name="verticalSpacer_10">
           <property name="orientation">
@@ -1903,6 +2003,13 @@
           </property>
          </spacer>
         </item>
+        <item row="17" column="0">
+         <widget class="QLabel" name="label_11">
+          <property name="text">
+           <string>How old are they?</string>
+          </property>
+         </widget>
+        </item>
         <item row="14" column="0">
          <spacer name="verticalSpacer_11">
           <property name="orientation">
@@ -1916,16 +2023,736 @@
           </property>
          </spacer>
         </item>
-        <item row="17" column="0" colspan="2">
-         <widget class="QPushButton" name="wave3Genbtn">
+        <item row="18" column="0">
+         <spacer name="verticalSpacer_12">
+          <property name="orientation">
+           <enum>Qt::Vertical</enum>
+          </property>
+          <property name="sizeHint" stdset="0">
+           <size>
+            <width>20</width>
+            <height>40</height>
+           </size>
+          </property>
+         </spacer>
+        </item>
+        <item row="0" column="0" colspan="2">
+         <widget class="QLabel" name="label_3">
           <property name="text">
-           <string>Generate Background</string>
+           <string>Character Background and Motivation</string>
+          </property>
+          <property name="alignment">
+           <set>Qt::AlignCenter</set>
           </property>
          </widget>
         </item>
        </layout>
       </widget>
-      <widget class="QWidget" name="page"/>
+      <widget class="QWidget" name="page">
+       <layout class="QGridLayout" name="gridLayout_8">
+        <item row="5" column="1">
+         <widget class="QPlainTextEdit" name="text3">
+          <property name="readOnly">
+           <bool>true</bool>
+          </property>
+         </widget>
+        </item>
+        <item row="6" column="1">
+         <widget class="QPushButton" name="finishButton">
+          <property name="text">
+           <string>Finish</string>
+          </property>
+         </widget>
+        </item>
+        <item row="5" column="0">
+         <widget class="QRadioButton" name="radioButton_47">
+          <property name="text">
+           <string/>
+          </property>
+          <attribute name="buttonGroup">
+           <string notr="true">backgroundGroup</string>
+          </attribute>
+         </widget>
+        </item>
+        <item row="0" column="1">
+         <widget class="QLabel" name="label_12">
+          <property name="text">
+           <string>Character Background and Motivation</string>
+          </property>
+          <property name="alignment">
+           <set>Qt::AlignCenter</set>
+          </property>
+         </widget>
+        </item>
+        <item row="2" column="0" colspan="2">
+         <widget class="QLabel" name="label_13">
+          <property name="text">
+           <string>Select the background you feel best fits your character. You can always edit it later!</string>
+          </property>
+          <property name="alignment">
+           <set>Qt::AlignLeading|Qt::AlignLeft|Qt::AlignTop</set>
+          </property>
+         </widget>
+        </item>
+        <item row="3" column="0">
+         <widget class="QRadioButton" name="radioButton_45">
+          <property name="text">
+           <string/>
+          </property>
+          <property name="checked">
+           <bool>true</bool>
+          </property>
+          <attribute name="buttonGroup">
+           <string notr="true">backgroundGroup</string>
+          </attribute>
+         </widget>
+        </item>
+        <item row="4" column="1">
+         <widget class="QPlainTextEdit" name="text2">
+          <property name="readOnly">
+           <bool>true</bool>
+          </property>
+         </widget>
+        </item>
+        <item row="3" column="1">
+         <widget class="QPlainTextEdit" name="text1">
+          <property name="readOnly">
+           <bool>true</bool>
+          </property>
+         </widget>
+        </item>
+        <item row="4" column="0">
+         <widget class="QRadioButton" name="radioButton_46">
+          <property name="text">
+           <string/>
+          </property>
+          <attribute name="buttonGroup">
+           <string notr="true">backgroundGroup</string>
+          </attribute>
+         </widget>
+        </item>
+        <item row="1" column="0" colspan="2">
+         <widget class="Line" name="line_11">
+          <property name="orientation">
+           <enum>Qt::Horizontal</enum>
+          </property>
+         </widget>
+        </item>
+       </layout>
+      </widget>
+      <widget class="QWidget" name="page_2">
+       <layout class="QGridLayout" name="gridLayout_14">
+        <item row="6" column="0" colspan="2">
+         <widget class="QPushButton" name="newCharBtn">
+          <property name="text">
+           <string>Make New Character</string>
+          </property>
+         </widget>
+        </item>
+        <item row="4" column="0" colspan="3">
+         <widget class="QTableWidget" name="statblock1_3">
+          <property name="sizePolicy">
+           <sizepolicy hsizetype="Minimum" vsizetype="Expanding">
+            <horstretch>0</horstretch>
+            <verstretch>0</verstretch>
+           </sizepolicy>
+          </property>
+          <property name="maximumSize">
+           <size>
+            <width>202</width>
+            <height>205</height>
+           </size>
+          </property>
+          <property name="editTriggers">
+           <set>QAbstractItemView::NoEditTriggers</set>
+          </property>
+          <property name="alternatingRowColors">
+           <bool>true</bool>
+          </property>
+          <property name="rowCount">
+           <number>6</number>
+          </property>
+          <property name="columnCount">
+           <number>2</number>
+          </property>
+          <attribute name="verticalHeaderVisible">
+           <bool>false</bool>
+          </attribute>
+          <row/>
+          <row/>
+          <row/>
+          <row/>
+          <row/>
+          <row/>
+          <column>
+           <property name="text">
+            <string>Stat</string>
+           </property>
+          </column>
+          <column>
+           <property name="text">
+            <string>Value</string>
+           </property>
+          </column>
+          <item row="0" column="0">
+           <property name="text">
+            <string>Strength</string>
+           </property>
+          </item>
+          <item row="1" column="0">
+           <property name="text">
+            <string>Dexterity</string>
+           </property>
+          </item>
+          <item row="1" column="1">
+           <property name="text">
+            <string/>
+           </property>
+          </item>
+          <item row="2" column="0">
+           <property name="text">
+            <string>Constitution</string>
+           </property>
+          </item>
+          <item row="2" column="1">
+           <property name="text">
+            <string/>
+           </property>
+          </item>
+          <item row="3" column="0">
+           <property name="text">
+            <string>Intelligence</string>
+           </property>
+          </item>
+          <item row="3" column="1">
+           <property name="text">
+            <string/>
+           </property>
+          </item>
+          <item row="4" column="0">
+           <property name="text">
+            <string>Wisdom</string>
+           </property>
+          </item>
+          <item row="4" column="1">
+           <property name="text">
+            <string/>
+           </property>
+          </item>
+          <item row="5" column="0">
+           <property name="text">
+            <string>Charisma</string>
+           </property>
+          </item>
+         </widget>
+        </item>
+        <item row="5" column="0" colspan="6">
+         <widget class="QPlainTextEdit" name="bckgrndText">
+          <property name="sizePolicy">
+           <sizepolicy hsizetype="Minimum" vsizetype="Expanding">
+            <horstretch>0</horstretch>
+            <verstretch>0</verstretch>
+           </sizepolicy>
+          </property>
+          <property name="maximumSize">
+           <size>
+            <width>425</width>
+            <height>16777215</height>
+           </size>
+          </property>
+          <property name="documentTitle">
+           <string>Background and Description</string>
+          </property>
+         </widget>
+        </item>
+        <item row="4" column="3" colspan="3">
+         <widget class="QTableWidget" name="tableWidget">
+          <property name="sizePolicy">
+           <sizepolicy hsizetype="Minimum" vsizetype="Expanding">
+            <horstretch>0</horstretch>
+            <verstretch>0</verstretch>
+           </sizepolicy>
+          </property>
+          <property name="maximumSize">
+           <size>
+            <width>219</width>
+            <height>205</height>
+           </size>
+          </property>
+          <property name="alternatingRowColors">
+           <bool>true</bool>
+          </property>
+          <attribute name="verticalHeaderVisible">
+           <bool>false</bool>
+          </attribute>
+          <row>
+           <property name="text">
+            <string/>
+           </property>
+          </row>
+          <row>
+           <property name="text">
+            <string/>
+           </property>
+          </row>
+          <row>
+           <property name="text">
+            <string/>
+           </property>
+          </row>
+          <row>
+           <property name="text">
+            <string/>
+           </property>
+          </row>
+          <row>
+           <property name="text">
+            <string/>
+           </property>
+          </row>
+          <row>
+           <property name="text">
+            <string/>
+           </property>
+          </row>
+          <row>
+           <property name="text">
+            <string/>
+           </property>
+          </row>
+          <row>
+           <property name="text">
+            <string/>
+           </property>
+          </row>
+          <row>
+           <property name="text">
+            <string/>
+           </property>
+          </row>
+          <row>
+           <property name="text">
+            <string/>
+           </property>
+          </row>
+          <row>
+           <property name="text">
+            <string/>
+           </property>
+          </row>
+          <row>
+           <property name="text">
+            <string/>
+           </property>
+          </row>
+          <row>
+           <property name="text">
+            <string/>
+           </property>
+          </row>
+          <row>
+           <property name="text">
+            <string/>
+           </property>
+          </row>
+          <row>
+           <property name="text">
+            <string/>
+           </property>
+          </row>
+          <row>
+           <property name="text">
+            <string/>
+           </property>
+          </row>
+          <row>
+           <property name="text">
+            <string>New Row</string>
+           </property>
+          </row>
+          <row>
+           <property name="text">
+            <string/>
+           </property>
+          </row>
+          <row>
+           <property name="text">
+            <string/>
+           </property>
+          </row>
+          <row>
+           <property name="text">
+            <string/>
+           </property>
+          </row>
+          <row>
+           <property name="text">
+            <string/>
+           </property>
+          </row>
+          <row>
+           <property name="text">
+            <string>New Row</string>
+           </property>
+          </row>
+          <row>
+           <property name="text">
+            <string/>
+           </property>
+          </row>
+          <row>
+           <property name="text">
+            <string/>
+           </property>
+          </row>
+          <row>
+           <property name="text">
+            <string/>
+           </property>
+          </row>
+          <row>
+           <property name="text">
+            <string/>
+           </property>
+          </row>
+          <column>
+           <property name="text">
+            <string>Skill</string>
+           </property>
+          </column>
+          <column>
+           <property name="text">
+            <string>Modifier</string>
+           </property>
+          </column>
+          <item row="0" column="0">
+           <property name="text">
+            <string>Acrobatics</string>
+           </property>
+          </item>
+          <item row="1" column="0">
+           <property name="text">
+            <string>Appraise</string>
+           </property>
+          </item>
+          <item row="2" column="0">
+           <property name="text">
+            <string>Bluff</string>
+           </property>
+          </item>
+          <item row="3" column="0">
+           <property name="text">
+            <string>Climb</string>
+           </property>
+          </item>
+          <item row="3" column="1">
+           <property name="text">
+            <string/>
+           </property>
+          </item>
+          <item row="4" column="0">
+           <property name="text">
+            <string>Craft</string>
+           </property>
+          </item>
+          <item row="4" column="1">
+           <property name="text">
+            <string/>
+           </property>
+          </item>
+          <item row="5" column="0">
+           <property name="text">
+            <string>Diplomacy</string>
+           </property>
+          </item>
+          <item row="5" column="1">
+           <property name="text">
+            <string/>
+           </property>
+          </item>
+          <item row="6" column="0">
+           <property name="text">
+            <string>Disable Device</string>
+           </property>
+          </item>
+          <item row="7" column="0">
+           <property name="text">
+            <string>Disguise</string>
+           </property>
+          </item>
+          <item row="8" column="0">
+           <property name="text">
+            <string>Escape Artist</string>
+           </property>
+          </item>
+          <item row="9" column="0">
+           <property name="text">
+            <string>Fly</string>
+           </property>
+          </item>
+          <item row="9" column="1">
+           <property name="text">
+            <string/>
+           </property>
+          </item>
+          <item row="10" column="0">
+           <property name="text">
+            <string>Handle Animal</string>
+           </property>
+          </item>
+          <item row="10" column="1">
+           <property name="text">
+            <string/>
+           </property>
+          </item>
+          <item row="11" column="0">
+           <property name="text">
+            <string>Heal</string>
+           </property>
+          </item>
+          <item row="11" column="1">
+           <property name="text">
+            <string/>
+           </property>
+          </item>
+          <item row="12" column="0">
+           <property name="text">
+            <string>Intimidate</string>
+           </property>
+          </item>
+          <item row="12" column="1">
+           <property name="text">
+            <string/>
+           </property>
+          </item>
+          <item row="13" column="0">
+           <property name="text">
+            <string>Knowledge</string>
+           </property>
+          </item>
+          <item row="14" column="0">
+           <property name="text">
+            <string>Linguistics</string>
+           </property>
+          </item>
+          <item row="15" column="0">
+           <property name="text">
+            <string>Perception</string>
+           </property>
+          </item>
+          <item row="16" column="0">
+           <property name="text">
+            <string>Perform</string>
+           </property>
+          </item>
+          <item row="16" column="1">
+           <property name="text">
+            <string/>
+           </property>
+          </item>
+          <item row="17" column="0">
+           <property name="text">
+            <string>Profession</string>
+           </property>
+          </item>
+          <item row="17" column="1">
+           <property name="text">
+            <string/>
+           </property>
+          </item>
+          <item row="18" column="0">
+           <property name="text">
+            <string>Ride</string>
+           </property>
+          </item>
+          <item row="18" column="1">
+           <property name="text">
+            <string/>
+           </property>
+          </item>
+          <item row="19" column="0">
+           <property name="text">
+            <string>Sense Motive</string>
+           </property>
+          </item>
+          <item row="19" column="1">
+           <property name="text">
+            <string/>
+           </property>
+          </item>
+          <item row="20" column="0">
+           <property name="text">
+            <string>Sleight of Hand</string>
+           </property>
+          </item>
+          <item row="21" column="0">
+           <property name="text">
+            <string>Spellcraft</string>
+           </property>
+          </item>
+          <item row="21" column="1">
+           <property name="text">
+            <string/>
+           </property>
+          </item>
+          <item row="22" column="0">
+           <property name="text">
+            <string>Stealth</string>
+           </property>
+          </item>
+          <item row="22" column="1">
+           <property name="text">
+            <string/>
+           </property>
+          </item>
+          <item row="23" column="0">
+           <property name="text">
+            <string>Survival</string>
+           </property>
+          </item>
+          <item row="23" column="1">
+           <property name="text">
+            <string/>
+           </property>
+          </item>
+          <item row="24" column="0">
+           <property name="text">
+            <string>Swim</string>
+           </property>
+          </item>
+          <item row="25" column="0">
+           <property name="text">
+            <string>Use Magic Device</string>
+           </property>
+          </item>
+         </widget>
+        </item>
+        <item row="6" column="4" colspan="2">
+         <widget class="QPushButton" name="exportBtn">
+          <property name="text">
+           <string>Export Character</string>
+          </property>
+         </widget>
+        </item>
+        <item row="0" column="2" colspan="2">
+         <widget class="QLabel" name="label_14">
+          <property name="text">
+           <string>Character Sheet</string>
+          </property>
+         </widget>
+        </item>
+        <item row="2" column="0">
+         <widget class="QLabel" name="label_44">
+          <property name="text">
+           <string>Race:</string>
+          </property>
+         </widget>
+        </item>
+        <item row="2" column="1">
+         <widget class="QLabel" name="raceLbl">
+          <property name="text">
+           <string>TextLabel</string>
+          </property>
+         </widget>
+        </item>
+        <item row="3" column="0">
+         <widget class="QLabel" name="label_47">
+          <property name="text">
+           <string>Height:</string>
+          </property>
+         </widget>
+        </item>
+        <item row="2" column="4">
+         <widget class="QLabel" name="classLbl">
+          <property name="text">
+           <string>TextLabel</string>
+          </property>
+         </widget>
+        </item>
+        <item row="2" column="3">
+         <widget class="QLabel" name="label_45">
+          <property name="text">
+           <string>Class:</string>
+          </property>
+         </widget>
+        </item>
+        <item row="1" column="0">
+         <widget class="QLabel" name="label_43">
+          <property name="text">
+           <string>Name:</string>
+          </property>
+         </widget>
+        </item>
+        <item row="1" column="1">
+         <widget class="QLabel" name="nameLbl">
+          <property name="text">
+           <string>TextLabel</string>
+          </property>
+         </widget>
+        </item>
+        <item row="3" column="1">
+         <widget class="QLabel" name="heightLbl">
+          <property name="text">
+           <string>TextLabel</string>
+          </property>
+         </widget>
+        </item>
+        <item row="3" column="3">
+         <widget class="QLabel" name="label_48">
+          <property name="text">
+           <string>Age:</string>
+          </property>
+         </widget>
+        </item>
+        <item row="3" column="4">
+         <widget class="QLabel" name="ageLbl">
+          <property name="text">
+           <string>TextLabel</string>
+          </property>
+         </widget>
+        </item>
+        <item row="1" column="3">
+         <widget class="QLabel" name="label_46">
+          <property name="text">
+           <string>Alignment:</string>
+          </property>
+         </widget>
+        </item>
+        <item row="1" column="4">
+         <widget class="QLabel" name="alignLbl">
+          <property name="text">
+           <string>TextLabel</string>
+          </property>
+         </widget>
+        </item>
+       </layout>
+       <zorder>label_14</zorder>
+       <zorder>bckgrndText</zorder>
+       <zorder>label_43</zorder>
+       <zorder>label_44</zorder>
+       <zorder>label_45</zorder>
+       <zorder>label_46</zorder>
+       <zorder>label_47</zorder>
+       <zorder>label_48</zorder>
+       <zorder>tableWidget</zorder>
+       <zorder>statblock1_3</zorder>
+       <zorder>newCharBtn</zorder>
+       <zorder>exportBtn</zorder>
+       <zorder>nameLbl</zorder>
+       <zorder>raceLbl</zorder>
+       <zorder>heightLbl</zorder>
+       <zorder>line_7</zorder>
+       <zorder>classLbl</zorder>
+       <zorder>ageLbl</zorder>
+       <zorder>alignLbl</zorder>
+      </widget>
+     </widget>
+    </item>
+    <item row="0" column="3">
+     <widget class="Line" name="line_7">
+      <property name="orientation">
+       <enum>Qt::Vertical</enum>
+      </property>
      </widget>
     </item>
    </layout>
@@ -1968,5 +2795,6 @@
   <buttongroup name="moneyGroup"/>
   <buttongroup name="traitPlusGroup"/>
   <buttongroup name="traitMinusGroup"/>
+  <buttongroup name="backgroundGroup"/>
  </buttongroups>
 </ui>
