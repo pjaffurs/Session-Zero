@@ -2050,19 +2050,48 @@
       </widget>
       <widget class="QWidget" name="page">
        <layout class="QGridLayout" name="gridLayout_8">
-        <item row="5" column="1">
-         <widget class="QPlainTextEdit" name="text3">
-          <property name="readOnly">
-           <bool>true</bool>
+        <item row="0" column="2">
+         <widget class="QLabel" name="label_12">
+          <property name="text">
+           <string>Character Background and Motivation</string>
+          </property>
+          <property name="alignment">
+           <set>Qt::AlignCenter</set>
           </property>
          </widget>
         </item>
-        <item row="6" column="1">
-         <widget class="QPushButton" name="finishButton">
-          <property name="text">
-           <string>Finish</string>
+        <item row="1" column="0" colspan="3">
+         <widget class="Line" name="line_11">
+          <property name="orientation">
+           <enum>Qt::Horizontal</enum>
           </property>
          </widget>
+        </item>
+        <item row="2" column="0" colspan="3">
+         <widget class="QLabel" name="label_13">
+          <property name="text">
+           <string>Select the additional traits that come from your character's background.</string>
+          </property>
+          <property name="alignment">
+           <set>Qt::AlignLeading|Qt::AlignLeft|Qt::AlignTop</set>
+          </property>
+         </widget>
+        </item>
+        <item row="3" column="2">
+         <widget class="QListWidget" name="bList1"/>
+        </item>
+        <item row="4" column="0" colspan="2">
+         <widget class="QRadioButton" name="radioButton_46">
+          <property name="text">
+           <string/>
+          </property>
+          <attribute name="buttonGroup">
+           <string notr="true">backgroundGroup</string>
+          </attribute>
+         </widget>
+        </item>
+        <item row="4" column="2">
+         <widget class="QListWidget" name="bList2"/>
         </item>
         <item row="5" column="0">
          <widget class="QRadioButton" name="radioButton_47">
@@ -2074,23 +2103,13 @@
           </attribute>
          </widget>
         </item>
-        <item row="0" column="1">
-         <widget class="QLabel" name="label_12">
-          <property name="text">
-           <string>Character Background and Motivation</string>
-          </property>
-          <property name="alignment">
-           <set>Qt::AlignCenter</set>
-          </property>
-         </widget>
+        <item row="5" column="2">
+         <widget class="QListView" name="bList3"/>
         </item>
-        <item row="2" column="0" colspan="2">
-         <widget class="QLabel" name="label_13">
+        <item row="6" column="2">
+         <widget class="QPushButton" name="finishButton">
           <property name="text">
-           <string>Select the background you feel best fits your character. You can always edit it later!</string>
-          </property>
-          <property name="alignment">
-           <set>Qt::AlignLeading|Qt::AlignLeft|Qt::AlignTop</set>
+           <string>Finish</string>
           </property>
          </widget>
         </item>
@@ -2105,37 +2124,6 @@
           <attribute name="buttonGroup">
            <string notr="true">backgroundGroup</string>
           </attribute>
-         </widget>
-        </item>
-        <item row="4" column="1">
-         <widget class="QPlainTextEdit" name="text2">
-          <property name="readOnly">
-           <bool>true</bool>
-          </property>
-         </widget>
-        </item>
-        <item row="3" column="1">
-         <widget class="QPlainTextEdit" name="text1">
-          <property name="readOnly">
-           <bool>true</bool>
-          </property>
-         </widget>
-        </item>
-        <item row="4" column="0">
-         <widget class="QRadioButton" name="radioButton_46">
-          <property name="text">
-           <string/>
-          </property>
-          <attribute name="buttonGroup">
-           <string notr="true">backgroundGroup</string>
-          </attribute>
-         </widget>
-        </item>
-        <item row="1" column="0" colspan="2">
-         <widget class="Line" name="line_11">
-          <property name="orientation">
-           <enum>Qt::Horizontal</enum>
-          </property>
          </widget>
         </item>
        </layout>
