@@ -21,9 +21,11 @@ class Program(QtWidgets.QMainWindow):
         self.name = ''
         self.stats = [0,0,0,0,0,0]
         self.traits = []
+        self.skills = []
         self.best = ''
         self.worst =''
         self.cls = ''
+        self.race = ''
         self.alignment = ''
 
         #self.ui.label.setFont(QtGui.QFont('SansSerif', 30))
@@ -51,6 +53,7 @@ class Program(QtWidgets.QMainWindow):
         # get character name
         self.name = self.ui.nameEdit.text()
         self.cls = self.ui.classBox.currentText()
+        self.race = self.ui.raceBox.currentText()
 		# return if name is blank
         if self.name == '':
             return
@@ -172,8 +175,8 @@ class Program(QtWidgets.QMainWindow):
 
     """
     clickGen3()
-    Takes the user's choices of background and motivation and generates a series of backstories following it, as well as adds new traits to the list.
-    Places the backstories in the next window for the user to select.
+    Takes the user's choices of background and motivation and generates a series of new traits for the list.
+    Places the new traits in the next window for the user to select.
     """
     def clickGen3(self):
         # create list of background choices
@@ -188,20 +191,36 @@ class Program(QtWidgets.QMainWindow):
         background.append(self.ui.goalBox.currentText())
         background.append(self.ui.ageBox.currentText())
 
-        # adds three distinct textual backgrounds to the three text boxes
-        self.ui.text1.insertPlainText(algs.getBackground(background, self.traits, self.stats, self.cls))
-        self.ui.text2.insertPlainText(algs.getBackground(background, self.traits, self.stats, self.cls))
-        self.ui.text3.insertPlainText(algs.getBackground(background, self.traits, self.stats, self.cls))
+        # adds three distinct lists of new traits to three list widgets
+        self.ui.bList1.addItems(algs.getAdditionalTraits(background, self.traits, self.stats, self.cls))
+        self.ui.bList3.addItems(algs.getAdditionalTraits(background, self.traits, self.stats, self.cls))
+        self.ui.bList2.addItems(algs.getAdditionalTraits(background, self.traits, self.stats, self.cls))
 
         self.ui.stackedWidget.setCurrentIndex(6)
-
+        
     """
     genCharacter()
     Generates the full character according the the user's choices from the threee waves of questions and selections.
     Populates the various fields with stats, backstory, skills, and basic information.
     """
     def genCharacter(self):
-
+        buttonList = self.ui.backgroundGroup.buttons()
+        
+        if buttons[0].isSelected():
+            chosen = self.ui.bList1
+        elif buttons[1].isSelected():
+            chosen = self.ui.bList2
+        else:
+            chosen = self.ui.bList3
+        
+        # add new traits to trait list
+        for i in range(chosen.count()):
+            self.append(chosen.item(i).text())
+        
+        self.ui.statList.addItems(self.stats)
+        self.ui.skillList.addItems(self.skills)
+        # generate textual background and fill textbox with it
+        self.ui.bckgrndText.insertPlainText(algs.getBackground(self.traits, self.stats, self.cls, self.race))
         self.ui.stackedWidget.setCurrentIndex(7)
 
 if __name__ == '__main__':
