@@ -1,7 +1,8 @@
 import random
 # algs.py
-# This file holds the non member-functions used for this project, mostly for calculations and generations of stats.
+# This file holds the non member-functions used for this project, mostly for calculations and generations of stats or traits.
 # It also holds several tables/mappings of strings in dicts, which in the future would be moved to a database.
+# I realize this is horrible memory-inefficient and had I realized how much of this I would need earlier in the project would have absolutely put it into a DB
 
 traitMap = {'loyalty':['loyal','honorable','faithful','positive','reliable','consistent','honest'],
             'compassion':['kind','empathetic','courteous','altruistic','helpful','forgiving','selfless'],
@@ -22,7 +23,48 @@ traitMap = {'loyalty':['loyal','honorable','faithful','positive','reliable','con
             'charisma':['charismatic','extroverted','confident','silver-tongued','attentive','inspiring','flirtatious','talkative'],
             'dexterity':['agile','quick-witted','hyperactive','reactive','adaptive','coordinated','calm'],
             'strength':['strong','willful','confident','loud','boisterous','positive','active','assertive'],
-            'constitution':['hearty','quiet','resilient','stubborn','gregarious','healthy','lively']}
+            'constitution':['hearty','quiet','resilient','stubborn','gregarious','healthy','lively'],
+            'large family':['well-adjusted','sociable','loud','diplomatic','low-maintenance','open','happy'],
+            'only child':['independent','sensitive','mature','over-achieving','uncompromising','stubborn','private'],
+            'orphan':['self-motivating','independent','insecure','lonely','self-doubting','shy','dejected'],
+            'one parent':['mature','involved','brave','accepting','angry','abrasive','maternal','open-minded'],
+            'lonely':['lonely','loving','lecherous','dependent','needy','irritating','sad','hopeless','desperate'],
+            'abusive':['abusive','harsh','flighty','self-destructive','depressed','needy','hypersexual','neutral','shy','defensive','paranoid'],
+            'loving':['loving','happy','positive','optimistic','compassionate','polite','helpful','honest'],
+            'tragic':['broken','depressed','accepting','dejected','unbreakable','unfazed','neutral','angry'],
+            'peaceful':['peaceful','relaxed','calm','complacent','cooperative','neutral','detached','lazy'],
+            'exhausting':['haggard','tired','lazy','busy','productive','irate','stressed','reliable','unmotivated'],
+            'large city':['social','open-minded','friendly','versatile','wild','selfless','stressed','conscientious'],
+            'small village':['insular','curious','adventurous','restrained','self-conscious','considerate','naive'],
+            'noble palace':['privileged','inquisitive','entitled','courteous','rebellious','sheltered','lawful'],
+            'religious community':['pious','insular','closed-minded','modest','rebellious','shy','chaste','nervous','orderly'],
+            'slums':['resourceful','thankful','independent','stingy','selfish','resentful','vigilant','hopeful','generous'],
+            'traveling':['open-minded','world-wise','experienced','confident','explorative','curious','generous'],
+            'isolated area':['wild','independent','disrespectful','unruly','barbarous','uncivilized','realistic'],
+            'place of learning':['studious','erudite','knowledgeable','rebellious','courteous','educated','quiet'],
+            'lower class':['humble','hard working','diligent','responsible','frugal','envious','unrefined'],
+            'merchant class':['ambitious','manipulative','industrious','motivated','social','dishonest','self-made'],
+            'aristocrat':['scheming','sycophantic','ambitious','courtly','observant','refined','cutthroat','aloof'],
+            'royalty':['affluent','audacious','haughty','educated','sheltered','naive','presumptuous','ruthless'],
+            'child':['hopeful','creative','bratty','rowdy','shy','naive','observant','childish','curious'],
+            'adolescent':['immature','naive','hormonal','amorous','moody','rebellious','rude','youthful'],
+            'adult':['paranoid','self-centered','neurotic','stable','kind','parental','loyal','dishonest'],
+            'middle-aged':['tired','stable','tranquil','stagnant','satisfied','conscientious','mature'],
+            'old':['old','exhausted','experienced','helpful','cautious','depressed','lawful','settled','crochety'],
+            'venerable':['wizened','crotchety','slow','ornery','disrespectful','aloof','respected','stubborn','nostalgic'],
+            'immortal':['well-traveled','experienced','tired','vivacious','proud','self-sufficient','bold','heroic'],
+            'true love':['honest','loyal','determined','hopeful','pure-hearted','idealistic'],
+            'revenge':['lawful','loyal','retributive','disillusioned','dark','obsessive'],
+            'save a life':['compassionate','merciful','good-natured','helpful','determined'],
+            'wealth':['greedy','envious','cutthroat','miserly','industrious','selfish'],
+            'power':['lustful','sly','ruthless','confident','unassuming','meticulous','sinister'],
+            'freedom':['idealistic','repressed','courageous','preachy','rebellious'],
+            'see the world':['repressed','wanderlust','naive','daring','curious'],
+            'be a hero':['idealistic','naive','honorable','self-assured','good-natured','selfless'],
+            'survive':['abused','repressed','distrustful','fearful','adaptive','flighty'],
+            'obtain knowledge':['scholarly','resourceful','learned','studious','curious','obsessive'],
+            'provide for family':['loving','maternal','selfless','determined','willful'],
+            'none':['wild','unrestrained','fierce','independent','unbreakable','antisocial','self-reliant','inquisitive','closed-minded']}
 
 skills = {'Acrobatics':1,
           'Appraise':5,
@@ -58,7 +100,7 @@ classSkills = {'Adept':['Craft','Handle Animal','Heal','Knowledge','Profession',
                'Cleric':['Appraise','Craft','Diplomacy','Heal','Knowledge','Linguistics','Profession','Sense Motive','Spellcraft'],
                'Commoner':['Climb','Craft','Handle Animal','Perception','Profession','Ride','Swim'],
                'Druid':['Climb','Craft','Fly','Handle Animal','Heal','Knowledge','Perception','Profession','Ride','Spellcraft','Survival','Swim'],
-               'Expert':['Appraise','Craft''Profession'],
+               'Expert':['Appraise','Craft','Profession'],
                'Fighter':['Climb','Craft','Handle Animal','Intimidate','Knowledge','Profession','Ride','Survival','Swim'],
                'Monk':['Acrobatics','Climb','Craft','Escape Artist','Intimidate','Knowledge','Perception','Perform','Profession','Ride','Sense Motive','Stealth','Swim'],
                'Paladin':['Craft','Diplomacy','Handle Animal','Heal','Knowledge','Profession','Ride','Sense Motive','Spellcraft'],
@@ -211,14 +253,76 @@ def getTraits(best, worst, traits, stats):
 getAdditionalTraits()
 Takes the user's choices of background features and motive, expanding on them to create a short textual background.
 Adds new traits to the user's traits, while also expanding on some of them in the background.
-Additionally computes the skills needed for the final page.
 """
 def getAdditionalTraits(choices, traits, stats, cls, race):
-    
+    newTraits = []
     # choices are: family, childhood, env, social status, role model, memory, goal, age
+    # role model/memory irrelevant here
+    # case for each case per additional choice, background shaping character description
+
+    # family: large family, only child, orphan, one parent, distant family, none
+    current = traitMap[choices[0]]
+    length = len(current) - 1
+    for i in range(random.randint(0,3)):
+        newTraits.append(current[random.randint(0,length)])
+
+    # childhood
+    current = traitMap[choices[1]]
+    length = len(current) - 1
+    for i in range(random.randint(0,3)):
+        newTraits.append(current[random.randint(0,length)])
+
+    # environment
+    current = traitMap[choices[2]]
+    length = len(current) - 1
+    for i in range(random.randint(0,3)):
+        newTraits.append(current[random.randint(0,length)])
+
+    # social status
+    current = traitMap[choices[3]]
+    length = len(current) - 1
+    for i in range(random.randint(0,3)):
+        newTraits.append(current[random.randint(0,length)])
+
+    # goal
+    current = traitMap[choices[6]]
+    length = len(current) - 1
+    for i in range(random.randint(0,3)):
+        newTraits.append(current[random.randint(0,length)])
+
+    # age
+    current = traitMap[choices[7]]
+    length = len(current) - 1
+    for i in range(random.randint(0,2)):
+        newTraits.append(current[random.randint(0,length)])
+
+    # randomness
+    # add one random additional trait from a random category
+    keys = traitMap.keys()
+    val = keys[random.randint(0,len(keys) - 1)]
+    newTraits.append(traitMap[val][random.randint(0,len(traitMap[val]) - 1)])
+
+    return list(dict.fromkeys(newTraits))
     
-    return newTraits, skills
-    
+"""
+getSkills()
+Takes the users stats and class and computes their skill modifiers.
+"""
+def getSkills(stats, cls):
+    # TODO: add racial bonuses, class bonuses, skill points by class and distribution, personal choices (could allow changes on stat screen)
+    mySkills = []
+    keyList = skills.keys()
+    classKeys = classSkills[cls]
+
+    # calculate skill modifiers
+    for key in keyList:
+        bonus = 0
+        if key in classSkills[cls]:
+            bonus = 3
+        mySkills.append((stats[skills[key]] - 10) // 2 + bonus)
+
+    return mySkills
+
 
 def getBackground(traits, stats, cls, race):
     return

@@ -51,7 +51,7 @@
     <item row="0" column="2">
      <widget class="QStackedWidget" name="stackedWidget">
       <property name="currentIndex">
-       <number>7</number>
+       <number>5</number>
       </property>
       <widget class="QWidget" name="startPage">
        <layout class="QGridLayout" name="gridLayout_2">
@@ -1592,11 +1592,6 @@
           </item>
           <item>
            <property name="text">
-            <string>distant family</string>
-           </property>
-          </item>
-          <item>
-           <property name="text">
             <string>none</string>
            </property>
           </item>
@@ -2138,7 +2133,7 @@
          </widget>
         </item>
         <item row="4" column="0" colspan="3">
-         <widget class="QTableWidget" name="statblock1_3">
+         <widget class="QTableWidget" name="statTable">
           <property name="sizePolicy">
            <sizepolicy hsizetype="Minimum" vsizetype="Expanding">
             <horstretch>0</horstretch>
@@ -2254,7 +2249,7 @@
          </widget>
         </item>
         <item row="4" column="3" colspan="3">
-         <widget class="QTableWidget" name="tableWidget">
+         <widget class="QTableWidget" name="skillTable">
           <property name="sizePolicy">
            <sizepolicy hsizetype="Minimum" vsizetype="Expanding">
             <horstretch>0</horstretch>
@@ -2722,8 +2717,8 @@
        <zorder>label_46</zorder>
        <zorder>label_47</zorder>
        <zorder>label_48</zorder>
-       <zorder>tableWidget</zorder>
-       <zorder>statblock1_3</zorder>
+       <zorder>skillTable</zorder>
+       <zorder>statTable</zorder>
        <zorder>newCharBtn</zorder>
        <zorder>exportBtn</zorder>
        <zorder>nameLbl</zorder>

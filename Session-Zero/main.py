@@ -192,9 +192,9 @@ class Program(QtWidgets.QMainWindow):
         background.append(self.ui.ageBox.currentText())
 
         # adds three distinct lists of new traits to three list widgets
-        self.ui.bList1.addItems(algs.getAdditionalTraits(background, self.traits, self.stats, self.cls))
-        self.ui.bList3.addItems(algs.getAdditionalTraits(background, self.traits, self.stats, self.cls))
-        self.ui.bList2.addItems(algs.getAdditionalTraits(background, self.traits, self.stats, self.cls))
+        self.ui.bList1.addItems(algs.getAdditionalTraits(background, self.traits, self.stats, self.cls, self.race))
+        self.ui.bList3.addItems(algs.getAdditionalTraits(background, self.traits, self.stats, self.cls, self.race))
+        self.ui.bList2.addItems(algs.getAdditionalTraits(background, self.traits, self.stats, self.cls, self.race))
 
         self.ui.stackedWidget.setCurrentIndex(6)
         
@@ -217,8 +217,12 @@ class Program(QtWidgets.QMainWindow):
         for i in range(chosen.count()):
             self.append(chosen.item(i).text())
         
-        self.ui.statList.addItems(self.stats)
-        self.ui.skillList.addItems(self.skills)
+        # compute skills
+        self.skills = algs.getSkills(self.stats, self.cls)
+
+        self.ui.statTable.addItems(self.stats)
+        self.ui.skillTable.addItems(self.skills)
+
         # generate textual background and fill textbox with it
         self.ui.bckgrndText.insertPlainText(algs.getBackground(self.traits, self.stats, self.cls, self.race))
         self.ui.stackedWidget.setCurrentIndex(7)
