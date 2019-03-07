@@ -208,10 +208,17 @@ def getTraits(best, worst, traits, stats):
 
 
 """
-getBackground()
+getAdditionalTraits()
 Takes the user's choices of background features and motive, expanding on them to create a short textual background.
 Adds new traits to the user's traits, while also expanding on some of them in the background.
+Additionally computes the skills needed for the final page.
 """
-def getBackground(choices, traits, stats, cls):
+def getAdditionalTraits(choices, traits, stats, cls, race):
+    
+    # choices are: family, childhood, env, social status, role model, memory, goal, age
+    
+    return newTraits, skills
+    
 
+def getBackground(traits, stats, cls, race):
     return
