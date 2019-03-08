@@ -30,7 +30,7 @@ class Program(QtWidgets.QMainWindow):
         self.alignment = ''
         self.age = 0
 
-        #self.ui.label.setFont(QtGui.QFont('SansSerif', 30))
+        self.ui.titleLabel.setFont(QtGui.QFont('SansSerif', 30))
         #self.ui.label.setGeometry(QtCore.QRect(10, 10, 200, 200))
 
         self.ui.buildBtn.clicked.connect(self.clickBuild)
@@ -56,8 +56,11 @@ class Program(QtWidgets.QMainWindow):
     def clickGen(self):
         # get character name
         self.name = self.ui.nameEdit.text()
+        self.ui.nameEdit.clear()
         self.cls = self.ui.classBox.currentText()
+        self.ui.classBox.setCurrentIndex(0)
         self.race = self.ui.raceBox.currentText()
+        self.ui.raceBox.setCurrentIndex(0)
 		# return if name is blank
         if self.name == '':
             return
@@ -75,6 +78,9 @@ class Program(QtWidgets.QMainWindow):
                 choices.append(-1)
             else:
                 choices.append(0)
+            plusButtons[i].setChecked(False)
+            minusButtons[i].setChecked(False)
+        
 
         # generate 3 statblocks
         for i in range(3):
@@ -127,6 +133,8 @@ class Program(QtWidgets.QMainWindow):
                 self.best = bestList[i].text().lower()
             if worstList[i].isChecked():
                 self.worst = worstList[i].text().lower()
+        self.ui.radioButton.setChecked(True)
+        worstList[0].setChecked(True)
 
         print(self.best)
         print(self.worst)
@@ -138,6 +146,7 @@ class Program(QtWidgets.QMainWindow):
             for i in range(3):
                 if btns[i].isChecked():
                     tmpTraits.append(btns[i].text().lower())
+                    btns[i].setChecked(False)
                     break
         
         # generate additional traits and populate list
@@ -156,6 +165,8 @@ class Program(QtWidgets.QMainWindow):
         # take values from listWidget and add to traits
         for i in range(self.ui.listWidget.count()):
             self.traits.append(self.ui.listWidget.item(i).text())
+
+        self.ui.listWidget.clear()
 
         self.ui.stackedWidget.setCurrentIndex(5)
 
@@ -186,13 +197,21 @@ class Program(QtWidgets.QMainWindow):
         # create list of background choices
         
         self.bckgrndChoices.append(self.ui.familyBox.currentText())
+        self.ui.familyBox.setCurrentIndex(0)
         self.bckgrndChoices.append(self.ui.childBox.currentText())
+        self.ui.childBox.setCurrentIndex(0)
         self.bckgrndChoices.append(self.ui.envBox.currentText())
+        self.ui.envBox.setCurrentIndex(0)
         self.bckgrndChoices.append(self.ui.socialBox.currentText())
+        self.ui.socialBox.setCurrentIndex(0)
         self.bckgrndChoices.append(self.ui.rolemodelBox.currentText())
+        self.ui.rolemodelBox.setCurrentIndex(0)
         self.bckgrndChoices.append(self.ui.memBox.currentText())
+        self.ui.memBox.setCurrentIndex(0)
         self.bckgrndChoices.append(self.ui.goalBox.currentText())
+        self.ui.goalBox.setCurrentIndex(0)
         self.bckgrndChoices.append(self.ui.ageBox.currentText())
+        self.ui.ageBox.setCurrentIndex(0)
 
         # adds three distinct lists of new traits to three list widgets
         self.ui.bList1.addItems(algs.getAdditionalTraits(self.bckgrndChoices, self.traits, self.stats, self.cls, self.race))
@@ -282,7 +301,7 @@ class Program(QtWidgets.QMainWindow):
         self.race = ''
         self.alignment = ''
         self.age = 0
-
+ 
         self.ui.stackedWidget.setCurrentIndex(1)
 
 if __name__ == '__main__':

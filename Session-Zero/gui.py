@@ -24,6 +24,7 @@ class Ui_MainWindow(object):
         self.gridLayout_2.setContentsMargins(0, 0, 0, 0)
         self.gridLayout_2.setObjectName("gridLayout_2")
         self.titleLabel = QtWidgets.QLabel(self.startPage)
+        self.titleLabel.setFrameShadow(QtWidgets.QFrame.Plain)
         self.titleLabel.setAlignment(QtCore.Qt.AlignCenter)
         self.titleLabel.setObjectName("titleLabel")
         self.gridLayout_2.addWidget(self.titleLabel, 0, 0, 1, 1)
