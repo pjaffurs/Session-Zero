@@ -220,9 +220,12 @@ class Program(QtWidgets.QMainWindow):
         # compute skills
         self.skills = algs.getSkills(self.stats, self.cls)
 
-        self.ui.statTable.addItems(self.stats)
-        self.ui.skillTable.addItems(self.skills)
+        for i in range(6):
+            self.ui.statTable.setItem(i,1,QtWidgets.QTableWidgetItem(str(self.stats[i])))
 
+        for i in range(len(self.skills) - 1):
+            self.ui.skillTable.setItem(i,1,QtWidgets.QTableWidgetItem(str(self.skills[i])))
+            
         # generate textual background and fill textbox with it
         self.ui.bckgrndText.insertPlainText(algs.getBackground(self.traits, self.stats, self.cls, self.race))
         self.ui.stackedWidget.setCurrentIndex(7)
