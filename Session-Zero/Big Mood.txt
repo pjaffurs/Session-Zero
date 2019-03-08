@@ -1,0 +1,6 @@
+Name: Big MoodRace: DwarfClass: AdeptAge: 7
+Stats:Strength: 10 Dexterity: 12 Constitution: 13 Intelligence: 9 Wisdom: 15 Charisma: 9 
+Skills:Acrobatics: 1 Appraise: -1 Bluff: -1 Climb: 0 Craft: 2 Diplomacy: -1 Disable Device: 1 Disguise: -1 Escape Artist: 1 Fly: 1 Handle Animal: 2 Heal: 5 Intimidate: -1 Knowledge: 2 Linguistics: -1 Perception: 2 Perform: -1 Profession: 5 Ride: 1 Sense Motive: 2 Sleight of Hand: 1 Spellcraft: 2 Stealth: 1 Survival: 5 Swim: 0 Use Magic Device: -1 
+Big Mood was born into a large Dwarf family with many siblings and distant relations. They had a lonely childhood, with few to truly call their friends and fewer who gave them a second thought. These years were spent exploring the city of their birth, with its sights and sounds and varied peoples. They had little money to spend and made do with small comforts; it was a simple existence but it was what they had. Above all the people they knew, Big Mood looked up to a parent for guidance, seeing them as the ideal to be reached. Because of the death of one so close to them, they were driven to fill the hole in their heart with the power of true love.
+
+Over the course of their life, Big Mood has been known to be: loyal, short-tempered, personable, wise, loving, sad, stressed, wild, social, hard working, responsible, hopeful, and envious.

@@ -22,11 +22,13 @@ class Program(QtWidgets.QMainWindow):
         self.stats = [0,0,0,0,0,0]
         self.traits = []
         self.skills = []
+        self.bckgrndChoices = []
         self.best = ''
         self.worst =''
         self.cls = ''
         self.race = ''
         self.alignment = ''
+        self.age = 0
 
         #self.ui.label.setFont(QtGui.QFont('SansSerif', 30))
         #self.ui.label.setGeometry(QtCore.QRect(10, 10, 200, 200))
@@ -40,6 +42,8 @@ class Program(QtWidgets.QMainWindow):
         self.ui.delTraitBtn.clicked.connect(self.removeTraits)
         self.ui.wave3Genbtn.clicked.connect(self.clickGen3)
         self.ui.finishButton.clicked.connect(self.genCharacter)
+        self.ui.exportBtn.clicked.connect(self.exportCharacter)
+        self.ui.newCharBtn.clicked.connect(self.restart)
 
     def clickBuild(self):
         self.ui.stackedWidget.setCurrentIndex(1)
@@ -180,21 +184,20 @@ class Program(QtWidgets.QMainWindow):
     """
     def clickGen3(self):
         # create list of background choices
-        background = []
         
-        background.append(self.ui.familyBox.currentText())
-        background.append(self.ui.childBox.currentText())
-        background.append(self.ui.envBox.currentText())
-        background.append(self.ui.socialBox.currentText())
-        background.append(self.ui.rolemodelBox.currentText())
-        background.append(self.ui.memBox.currentText())
-        background.append(self.ui.goalBox.currentText())
-        background.append(self.ui.ageBox.currentText())
+        self.bckgrndChoices.append(self.ui.familyBox.currentText())
+        self.bckgrndChoices.append(self.ui.childBox.currentText())
+        self.bckgrndChoices.append(self.ui.envBox.currentText())
+        self.bckgrndChoices.append(self.ui.socialBox.currentText())
+        self.bckgrndChoices.append(self.ui.rolemodelBox.currentText())
+        self.bckgrndChoices.append(self.ui.memBox.currentText())
+        self.bckgrndChoices.append(self.ui.goalBox.currentText())
+        self.bckgrndChoices.append(self.ui.ageBox.currentText())
 
         # adds three distinct lists of new traits to three list widgets
-        self.ui.bList1.addItems(algs.getAdditionalTraits(background, self.traits, self.stats, self.cls, self.race))
-        self.ui.bList3.addItems(algs.getAdditionalTraits(background, self.traits, self.stats, self.cls, self.race))
-        self.ui.bList2.addItems(algs.getAdditionalTraits(background, self.traits, self.stats, self.cls, self.race))
+        self.ui.bList1.addItems(algs.getAdditionalTraits(self.bckgrndChoices, self.traits, self.stats, self.cls, self.race))
+        self.ui.bList3.addItems(algs.getAdditionalTraits(self.bckgrndChoices, self.traits, self.stats, self.cls, self.race))
+        self.ui.bList2.addItems(algs.getAdditionalTraits(self.bckgrndChoices, self.traits, self.stats, self.cls, self.race))
 
         self.ui.stackedWidget.setCurrentIndex(6)
         
@@ -203,32 +206,84 @@ class Program(QtWidgets.QMainWindow):
     Generates the full character according the the user's choices from the threee waves of questions and selections.
     Populates the various fields with stats, backstory, skills, and basic information.
     """
+    # TODO: alignment, weight/height -> stretch goals
     def genCharacter(self):
         buttonList = self.ui.backgroundGroup.buttons()
         
-        if buttons[0].isSelected():
+        if buttonList[0].isChecked():
             chosen = self.ui.bList1
-        elif buttons[1].isSelected():
+        elif buttonList[1].isChecked():
             chosen = self.ui.bList2
         else:
             chosen = self.ui.bList3
         
         # add new traits to trait list
         for i in range(chosen.count()):
-            self.append(chosen.item(i).text())
+            self.traits.append(chosen.item(i).text())
         
         # compute skills
         self.skills = algs.getSkills(self.stats, self.cls)
 
+        # populate tables with stat and skill values
         for i in range(6):
             self.ui.statTable.setItem(i,1,QtWidgets.QTableWidgetItem(str(self.stats[i])))
 
-        for i in range(len(self.skills) - 1):
+        for i in range(len(self.skills)):
             self.ui.skillTable.setItem(i,1,QtWidgets.QTableWidgetItem(str(self.skills[i])))
             
         # generate textual background and fill textbox with it
-        self.ui.bckgrndText.insertPlainText(algs.getBackground(self.traits, self.stats, self.cls, self.race))
+        self.ui.bckgrndText.insertPlainText(algs.getBackground(self.name, self.traits, self.stats, self.cls, self.race, self.bckgrndChoices))
+
+        # fill in header labels
+        self.ui.nameLbl.setText(self.name)
+        self.ui.classLbl.setText(self.cls)
+        self.ui.raceLbl.setText(self.race)
+        self.age = str(algs.getAge(self.race, self.bckgrndChoices[7]))
+        self.ui.ageLbl.setText(self.age)
         self.ui.stackedWidget.setCurrentIndex(7)
+
+    """
+    exportCharacter()
+    Takes the contents of the character sheet and writes it to a text file.
+    """
+    def exportCharacter(self):
+        with open('{}.txt'.format(self.name), 'w') as outfile:
+            outfile.write("Name: {}".format(self.name))
+            outfile.write("Race: {}".format(self.race))
+            outfile.write("Class: {}".format(self.cls))
+            outfile.write("Age: {}\n".format(self.age))
+            
+            outfile.write("Stats:")
+            for i in range(6):
+                outfile.write(self.ui.statTable.item(i,0).text() + ': ' + str(self.stats[i]) + ' ')
+
+            outfile.write("\nSkills:")
+            for i in range(len(self.skills)):
+                outfile.write(self.ui.skillTable.item(i,0).text() + ': ' + self.ui.skillTable.item(i,1).text() + ' ')
+
+            outfile.write('\n' + self.ui.bckgrndText.toPlainText())
+
+        Qt.QMessageBox.about(self,'Notice','Character data written to {}.txt'.format(self.name))
+
+    """
+    restart()
+    Restarts the character creation process by setting the current page index to the first part of creation and resetting all variables to nothing.
+    Also resets several lists to be empty.
+    """
+    def restart(self):
+        self.name = ''
+        self.stats = [0,0,0,0,0,0]
+        self.traits = []
+        self.skills = []
+        self.bckgrndChoices = []
+        self.best = ''
+        self.worst =''
+        self.cls = ''
+        self.race = ''
+        self.alignment = ''
+        self.age = 0
+
+        self.ui.stackedWidget.setCurrentIndex(1)
 
 if __name__ == '__main__':
     

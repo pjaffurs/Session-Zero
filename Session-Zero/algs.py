@@ -110,6 +110,13 @@ classSkills = {'Adept':['Craft','Handle Animal','Heal','Knowledge','Profession',
                'Warrior':['Climb','Craft','Handle Animal','Intimidate','Profession','Ride','Swim'],
                'Wizard':['Appraise','Craft','Fly','Knowledge','Linguistics','Profession','Spellcraft']}
 
+ageRanges = {'Human':[(3,12),(12,18),(15,34),(35,52),(53,70),(70,110)],
+             'Dwarf':[(3,20),(20,39),(40,124),(125,187),(188,249),(250,450)],
+             'Elf':[(3,50),(50,109),(110,174),(175,262),(263,349),(350,750)],
+             'Gnome':[(3,20),(20,39),(40,99),(100,149),(150,199),(200,500)],
+             'Half-elf':[(3,15),(13,19),(20,61),(62,92),(93,124),(125,185)],
+             'Half-orc':[(3,8),(9,13),(14,29),(30,44),(45,59),(60,80)],
+             'Halfling':[(3,14),(13,19),(20,49),(50,74),(75,99),(100,200)]}
 """
 getStatblock()
 Takes the users choies of race, class, and strength/weakness.
@@ -185,26 +192,25 @@ def getTraits(best, worst, traits, stats):
     traits.append(traitMap[best][0])
     traits.append(traitMap[worst][0])
 
-    # randomly add 2-3 traits from each list, based on greatest str/wk
-    for i in range(random.randint(2,3)):
+    # randomly add 0-2 traits from each list, based on greatest str/wk
+    for i in range(random.randint(0,2)):
         traits.append(traitMap[best][random.randint(1,glength - 1)])
+    for i in range(random.randint(0,2)):
         traits.append(traitMap[worst][random.randint(1,blength - 1)])
 
     # add more traits based on stats
     # INT
     if stats[3] >= 14:
         traits.append(traitMap['intelligence'][0])
-        for i in range(random.randint(1,2)):
+        for i in range(random.randint(0,2)):
             traits.append(traitMap['intelligence'][random.randint(1,7)])
     elif stats[3] < 8:
         traits.append('dumb')
-    else:
-        traits.append('clever')
 
     # CHA
     if stats[5] >= 14:
         traits.append(traitMap['charisma'][0])
-        for i in range(random.randint(1,2)):
+        for i in range(random.randint(0,2)):
             traits.append(traitMap['charisma'][random.randint(1,7)])
     elif stats[5] < 8:
         traits.append('flat')
@@ -214,7 +220,7 @@ def getTraits(best, worst, traits, stats):
     # WIS
     if stats[4] >= 14:
         traits.append(traitMap['wisdom'][0])
-        for i in range(random.randint(1,2)):
+        for i in range(random.randint(0,2)):
             traits.append(traitMap['wisdom'][random.randint(1,7)])
     elif stats[4] < 8:
         traits.append('foolish')
@@ -224,7 +230,7 @@ def getTraits(best, worst, traits, stats):
     # STR
     if stats[0] >= 14:
         traits.append(traitMap['strength'][0])
-        for i in range(random.randint(1,2)):
+        for i in range(random.randint(0,2)):
             traits.append(traitMap['strength'][random.randint(1,7)])
     elif stats[4] < 8:
         traits.append('weak')
@@ -232,7 +238,7 @@ def getTraits(best, worst, traits, stats):
     # DEX
     if stats[1] >= 14:
         traits.append(traitMap['dexterity'][0])
-        for i in range(random.randint(1,2)):
+        for i in range(random.randint(0,2)):
             traits.append(traitMap['dexterity'][random.randint(1,6)])
     elif stats[1] < 8:
         traits.append('clumsy')
@@ -240,7 +246,7 @@ def getTraits(best, worst, traits, stats):
     # CON
     if stats[2] >= 14:
         traits.append(traitMap['constitution'][0])
-        for i in range(random.randint(1,2)):
+        for i in range(random.randint(0,2)):
             traits.append(traitMap['constitution'][random.randint(1,6)])
     elif stats[2] < 8:
         traits.append('frail')
@@ -298,7 +304,7 @@ def getAdditionalTraits(choices, traits, stats, cls, race):
 
     # randomness
     # add one random additional trait from a random category
-    keys = traitMap.keys()
+    keys = list(traitMap.keys())
     val = keys[random.randint(0,len(keys) - 1)]
     newTraits.append(traitMap[val][random.randint(0,len(traitMap[val]) - 1)])
 
@@ -324,5 +330,148 @@ def getSkills(stats, cls):
     return mySkills
 
 
-def getBackground(traits, stats, cls, race):
-    return
+def getBackground(name, traits, stats, cls, race, choices):
+    # first sentence based on race and family
+    if choices[0] == 'orphan' or choices[0] == 'none:':
+        s = '{} was born to {} parents but '.format(name,race)
+        if choices[0] == 'orphan':
+            s += 'lost them at a young age, later being taken in by relatives.'
+        else:
+            s += 'was separated from them not long after birth and raised far away.'
+    elif choices[0] == 'large family':
+        s = '{} was born into a large {} family with many siblings and distant relations.'.format(name,race)
+    elif choices[0] == 'one parent':
+        s = '{} was born to {} parents but raised primarily by just their {}.'.format(name,race,'father' if random.randint(0,1) > 0 else 'mother')
+
+    # second sentence based on childhood
+    s += ' They had a {} childhood, '.format(choices[1])
+    if choices[1] == 'happy':
+        s += 'full of excitement, friendship, and joy from those around them.'
+    elif choices[1] == 'lonely':
+        s += 'with few to truly call their friends and fewer who gave them a second thought.'
+    elif choices[1] == 'loving':
+        s += 'full of all the love and support any child could ask for.'
+    elif choices[1] == 'abusive':
+        s += 'harsh and unforgiving as those who raised them and neglected them.'
+    elif choices[1] == 'tragic':
+        s += 'marred by loss of both those close to them and the true innocence of youth.'
+    elif chocies[1] == 'peaceful':
+        s += 'with little to do but sit back and enjoy life.'
+    else:
+        s += 'constantly working, following orders, and obeying those said to be above them.'
+
+    # third sentence by environment and social class
+    if choices[2] == 'large city':
+        s += ' These years were spent exploring the city of their birth, with its sights and sounds and varied peoples.'
+    elif choices[2] == 'noble palace':
+        if choices[3] == 'aristocrat' or choices[3] == 'royalty':
+            s += ' Raised in the trappings of nobility and a grand palace, they were surrounded by all the creature comfort they could want.'
+        else:
+            s += ' Their younger years were spent in service of nobility, seeing all the grand things they were born without.'
+    elif choices[2] == 'place of learning':
+        s += ' Few children have the chance to grow up in a school like {}, with such a connection to history and knowledge.'.format(name)
+    elif choices[2] == 'slums':
+        s += ' Whether poor or noble, growing up in the slums of a grand city can be a mixed experience amidst crime, community, and corruption.'
+    elif choices[2] == 'traveling':
+        s += ' As a child they saw much of the known world, traveling from place to place on ships and carts, seeing much of what it had to offer.'
+    elif choices[2] == 'isolated area':
+        s += ' They spent their youth far from what most would call "civilized" with only a scant few people and the local fauna to keep them company.'
+    elif choices[2] == 'small village':
+        s += ' Such a childhood was spent in a small, tightly-knit community, where secrets were rare and traditions followed to a tee.'
+    elif choices[2] == 'religious community':
+        s += ' For good or ill, {} grew up among priests and ascetics, with the tenets of faith drilled into them at every turn.'.format(name)
+
+    # fourth sentence by social class
+    if choices[3] == 'lower class':
+        s += ' They had little money to spend and made do with small comforts; it was a simple existence but it was what they had.'
+    elif choices[3] == 'merchant class':
+        s += ' Their business was learning trade and while they lacked the power and wealth of those above them they rarely lacked as well.'
+    elif choices[3] == 'aristocrat':
+        s += ' As a member of the nobility, they lacked nothing and slowly learned the games noble houses play.'
+    elif choices[3] == 'royalty':
+        s += ' A child of the blood of lords and kings, they were surrounded by courtiers and dignitaries and shown the ways of court.'
+    else:
+        s += ' Raised in a successful family, they had money and power and were taught to recognize it from a young age.'
+
+    # fifth sentence by role model
+    # TODO: add more variation here, should be a bit more interesting
+    s += ' Above all the people they knew, {} looked up to a {} for guidance, seeing them as the ideal to be reached.'.format(name, choices[4])
+    
+    # sixth sentence by memory and goal
+    if choices[5] == 'death in the family' or choices[5] == "friend's death":
+        s += " Because of the death of one so close to them, they were driven to "
+        if choices[6] == 'true love':
+            s += 'fill the hole in their heart with the power of true love.'
+        elif choices[6] == 'revenge':
+            s += 'avenge the death of their loved one by any means.'
+        elif choices[6] == 'save a life':
+            s += 'save the life of another and ensure nobody had to endure such loss again.'
+        elif choices[6] == 'survive':
+            s += 'escape the same fate themselves.'
+        elif choices[6] == 'be a hero':
+            s += 'become a hero and save lives rather than take them.'
+        else:
+            s += 'have the means to keep more death and misfortune from them.'
+    elif choices[5] == 'first kiss':
+        s += ' Their first kiss was a magical experience, leading them to '
+        if choices[6] == 'true love':
+            s += 'try to capture that moment of passion forever in a life partner.'
+        else:
+            s += 'live their life in pursuit of the same passion.'
+    elif choices[5] == 'being punished' or choices[5] == 'caught stealing':
+        s += ' After a harsh punishment as a child, their mind was opened to the idea that actions have consequences.'
+    elif choices[5] == 'home invaded':
+        s += ' Their home was invaded during their youth, resulting in '
+        if choices[6] == 'revenge':
+            s += 'their righteous quest for vengeance against the interlopers.'
+        elif choices[6] == 'survive':
+            s += 'an indomitable drive to survive, no matter the cost.'
+        elif choices[6] == 'save a life' or choices[6] == 'be a hero':
+            s += 'a drive to rescue those taken by the invaders.'
+        elif choices[6] == 'freedom':
+            s += 'the burning desire to free those repressed by the invaders and liberate their home.'
+        else:
+            s += 'the knowledge that one must have the means or the strength to protect what they care about.'
+    elif choices[5] == 'assault':
+        s += ' A childhood assault left them reeling and confused, but certain that '
+        if choices[6] == 'revenge':
+            s += 'the ones who caused them would suffer.'
+        else:
+            s += 'they must be strong enough to never let it happen again.'
+    else:
+        s += ' Running away from home as a youth taught them the value of stability but also the importance of discovering oneself.'
+
+    # finally append a list of traits to the very end
+    s += '\n\nOver the course of their life, {} has been known to be: '.format(name)
+    for trait in traits[0:len(traits)-2]:
+        s += trait + ', '
+    s += 'and ' + traits[len(traits)-1] + '.'
+
+    return s
+
+"""
+getAge()
+Calculates the age for a person based on their race.
+"""
+def getAge(race, ageGrp):
+    if ageGrp == 'child':
+        r = ageRanges[race][0]
+        return random.randint(r[0],r[1])
+    elif ageGrp == 'adult':
+        r = ageRanges[race][2]
+        return random.randint(r[0],r[1])
+    elif ageGrp == 'adolescent':
+        r = ageRanges[race][1]
+        return random.randint(r[0],r[1])
+    elif ageGrp == 'middle-aged':
+        r = ageRanges[race][3]
+        return random.randint(r[0],r[1])
+    elif ageGrp == 'old':
+        r = ageRanges[race][4]
+        return random.randint(r[0],r[1])
+    elif ageGrp == 'venerable':
+        r = ageRanges[race][5]
+        return random.randint(r[0],r[1])
+    else:
+        r = ageRanges[race]
+        return random.randint(r[0][0],r[5][1] + 200)
