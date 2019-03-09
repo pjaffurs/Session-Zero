@@ -441,6 +441,42 @@ def getBackground(name, traits, stats, cls, race, choices):
     else:
         s += ' Running away from home as a youth taught them the value of stability but also the importance of discovering oneself.'
 
+
+    # TODO: sentence or two by class
+    s += '\n\nAs a {}, {} '.format(cls, name)
+    if cls == 'Adept':
+        s += 'is a user of divine magic, drawing their power from their god or from nature in order to heal, harm, and protect.'
+    elif cls == 'Aristocrat':
+        s += 'is a social climber, whose rank determines their wealth and position to influence their community.'
+    elif cls == 'Barbarian':
+        s += 'is a fiere warrior, drawing on their inner fury and martial prowess to overpower foes, intimidate rivals, and endure any trial.'
+    elif cls == 'Bard':
+        s += 'uses the power of music to confuse and confound their foes while empowering allies with magical performance.'
+    elif cls == 'Cleric':
+        s += 'serves their deity throughout their life, drawing on their own strength and the magic of their god to heal friends and destroy foes.'
+    elif cls == 'Commoner':
+        s += 'is a simple, average person and, although lacking fame or wealth, is capable in their profession and personal goals.'
+    elif cls == 'Druid':
+        s += 'worships elemental forces or nature itself, drawing on such powers to command the world around them or transform into a beast themselves.'
+    elif cls == 'Expert':
+        s += 'is highly skilled in their chosen craft, capable of doing anything from running an inn, to blacksmithing, to even studying high society.'
+    elif cls == 'Fighter':
+        s += 'excels in physical combat, defeating enemies, controlling the flow of battle, and surviving their encounters using their specific skills and weapons.'
+    elif cls == 'Monk':
+        s += 'overcomes even the most dangerous challenges through mastery of self, striking where unexpected, and agile grace.'
+    elif cls == 'Paladin':
+        s += 'is a holy warrior, a bastion of righteousness against the evils of the world. Such paladins use armor, blade, and divine might to help the weak and cleanse the impure.'
+    elif cls == 'Ranger':
+        s += 'can hunt, track, and survive in any environment, using all manner of beasts, tools, and natural power to overcome danger.'
+    elif cls == 'Rogue':
+        s += 'is a master of stealth, trickery, and deception, hiding in plain sight before striking from the shadows or making use of their myriad skills to escape.'
+    elif cls == 'Sorcerer':
+        s += 'has the blood of a powerful creature flowing through their veins, granting them innate command of arcane power, living and breathing magic.'
+    elif cls == 'Warrior':
+        s += 'is a professional soldier with a wide range of experience across years and battles.'
+    elif cls == 'Wizard':
+        s += 'dedicates their life to studying arcane magic and the mysteries of the arcane. Through years of study, a wizard is able to harness abilities only dreamed of by others.'
+
     # finally append a list of traits to the very end
     s += '\n\nOver the course of their life, {} has been known to be: '.format(name)
     for trait in traits[0:len(traits)-2]:
