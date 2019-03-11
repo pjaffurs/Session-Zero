@@ -438,6 +438,8 @@ def getBackground(name, traits, stats, cls, race, choices):
             s += 'the ones who caused them would suffer.'
         else:
             s += 'they must be strong enough to never let it happen again.'
+    elif chocies[5] == 'making a friend':
+        s += ' '
     else:
         s += ' Running away from home as a youth taught them the value of stability but also the importance of discovering oneself.'
 
