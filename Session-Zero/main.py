@@ -4,7 +4,6 @@ import sys
 import random
 from PyQt5 import QtWidgets, QtCore, QtGui, Qt
 
-statList = ['']
 """
 Session Zero
 A computational creativity project based on the stat system of tabletop roleplaying games. Helps writers, tabletop players, and dungeon masters create, build, and understand the characters in their world.
@@ -138,17 +137,20 @@ class Program(QtWidgets.QMainWindow):
 
         print(self.best)
         print(self.worst)
-        groups = [self.ui.braveGroup.buttons(), self.ui.careGroup.buttons(), self.ui.friendGroup.buttons(), self.ui.honestGroup.buttons(), self.ui.humbleGroup.buttons(), self.ui.modestGroup.buttons(), 
-                  self.ui.moneyGroup.buttons(), self.ui.patientGroup.buttons(), self.ui.senseGroup.buttons()]
+        groups = [self.ui.braveGroup, self.ui.careGroup, self.ui.friendGroup, self.ui.honestGroup, self.ui.humbleGroup, self.ui.modestGroup, 
+                  self.ui.moneyGroup, self.ui.patientGroup, self.ui.senseGroup, self.ui.witGroup]
         
         # populate traits for randomization
-        for btns in groups:
+        for grp in groups:
+            btns = grp.buttons()
             for i in range(3):
                 if btns[i].isChecked():
                     tmpTraits.append(btns[i].text().lower())
+                    grp.setExclusive(False)
                     btns[i].setChecked(False)
+                    grp.setExclusive(True)
                     break
-        
+                
         # generate additional traits and populate list
         #for t in algs.getTraits(self.best, self.worst, tmpTraits, self.stats):
         self.ui.listWidget.addItems(algs.getTraits(self.best, self.worst, tmpTraits, self.stats))
@@ -239,7 +241,11 @@ class Program(QtWidgets.QMainWindow):
         # add new traits to trait list
         for i in range(chosen.count()):
             self.traits.append(chosen.item(i).text())
-        
+
+        self.ui.bList1.clear()
+        self.ui.bList2.clear()
+        self.ui.bList3.clear()
+
         # compute skills
         self.skills = algs.getSkills(self.stats, self.cls)
 
@@ -301,6 +307,7 @@ class Program(QtWidgets.QMainWindow):
         self.race = ''
         self.alignment = ''
         self.age = 0
+        self.ui.bckgrndText.clear()
  
         self.ui.stackedWidget.setCurrentIndex(1)
 

@@ -30,6 +30,7 @@ traitMap = {'loyalty':['loyal','honorable','faithful','positive','reliable','con
             'one parent':['mature','involved','brave','accepting','angry','abrasive','maternal','open-minded'],
             'lonely':['lonely','loving','lecherous','dependent','needy','irritating','sad','hopeless','desperate'],
             'abusive':['abusive','harsh','flighty','self-destructive','depressed','needy','hypersexual','neutral','shy','defensive','paranoid'],
+            'happy':['happy','optimisitic','joyful','trusting','supportive','open','contented','selfless','driven'],
             'loving':['loving','happy','positive','optimistic','compassionate','polite','helpful','honest'],
             'tragic':['broken','depressed','accepting','dejected','unbreakable','unfazed','neutral','angry'],
             'peaceful':['peaceful','relaxed','calm','complacent','cooperative','neutral','detached','lazy'],
@@ -45,6 +46,7 @@ traitMap = {'loyalty':['loyal','honorable','faithful','positive','reliable','con
             'lower class':['humble','hard working','diligent','responsible','frugal','envious','unrefined'],
             'merchant class':['ambitious','manipulative','industrious','motivated','social','dishonest','self-made'],
             'aristocrat':['scheming','sycophantic','ambitious','courtly','observant','refined','cutthroat','aloof'],
+            'upper class':['scheming','greedy','ambitious','comfortable','refined','industrious','self-made'],
             'royalty':['affluent','audacious','haughty','educated','sheltered','naive','presumptuous','ruthless'],
             'child':['hopeful','creative','bratty','rowdy','shy','naive','observant','childish','curious'],
             'adolescent':['immature','naive','hormonal','amorous','moody','rebellious','rude','youthful'],
@@ -332,6 +334,7 @@ def getSkills(stats, cls):
 
 def getBackground(name, traits, stats, cls, race, choices):
     # first sentence based on race and family
+    s = ''
     if choices[0] == 'orphan' or choices[0] == 'none:':
         s = '{} was born to {} parents but '.format(name,race)
         if choices[0] == 'orphan':
@@ -342,6 +345,8 @@ def getBackground(name, traits, stats, cls, race, choices):
         s = '{} was born into a large {} family with many siblings and distant relations.'.format(name,race)
     elif choices[0] == 'one parent':
         s = '{} was born to {} parents but raised primarily by just their {}.'.format(name,race,'father' if random.randint(0,1) > 0 else 'mother')
+    else:
+        s = '{} was born the only child to his parents and spent much time amongst adults.'.format(name)
 
     # second sentence based on childhood
     s += ' They had a {} childhood, '.format(choices[1])
@@ -355,7 +360,7 @@ def getBackground(name, traits, stats, cls, race, choices):
         s += 'harsh and unforgiving as those who raised them and neglected them.'
     elif choices[1] == 'tragic':
         s += 'marred by loss of both those close to them and the true innocence of youth.'
-    elif chocies[1] == 'peaceful':
+    elif choices[1] == 'peaceful':
         s += 'with little to do but sit back and enjoy life.'
     else:
         s += 'constantly working, following orders, and obeying those said to be above them.'
@@ -438,8 +443,31 @@ def getBackground(name, traits, stats, cls, race, choices):
             s += 'the ones who caused them would suffer.'
         else:
             s += 'they must be strong enough to never let it happen again.'
-    elif chocies[5] == 'making a friend':
-        s += ' '
+    elif choices[5] == 'making a friend':
+        s += ' Establishing their first true friendship taught them '
+        if choices[6] == 'revenge' or choices[6] == 'save a life':
+            s += 'to do whatever it takes to help a friend in need.'
+        elif choices[6] == 'provide for family':
+            s += 'to support and love those they care about.'
+        else:
+            s += 'the importance of having someone they could trust.'
+    elif choices[5] == 'witnessing magic':
+        s += ' Their first exposure to magic awakened them to the notion that '
+        if choices[6] == 'power':
+            s += 'extraordinary things can be accomplished by those with power and means.'
+        elif choices[6] == 'obtain knowledge':
+            s += 'there is much more to the world than meets the eye.'
+        else:
+            s += 'the world is a wondrous place, full of mystery and excitement.'
+    elif choices[5] == 'meeting a hero':
+        if choices[6] == 'be a hero':
+            s += ' Meeting a personal hero at a young age insprired them to become just that: a hero.'
+        else:
+            s += ' Meeting a hero of theirs at a young age gave them the courage and inspriation to be whoever they wanted to be.'
+    elif choices[5] == 'birth of sibling':
+        s += ' The birth of their sibling taught them about the importance of family.'
+    elif choices[5] == 'traveling':
+        s += ' Traveling outside their home for the first time opened their eyes to the wider world and its endless possibilities.'
     else:
         s += ' Running away from home as a youth taught them the value of stability but also the importance of discovering oneself.'
 
