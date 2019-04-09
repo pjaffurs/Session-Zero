@@ -2,6 +2,7 @@ from gui import Ui_MainWindow
 import algs
 import sys
 import random
+import json
 from PyQt5 import QtWidgets, QtCore, QtGui, Qt
 
 """
@@ -26,6 +27,7 @@ class Program(QtWidgets.QMainWindow):
         self.worst =''
         self.cls = ''
         self.race = ''
+        # TODO: alignment
         self.alignment = ''
         self.age = 0
 
@@ -33,6 +35,7 @@ class Program(QtWidgets.QMainWindow):
         #self.ui.label.setGeometry(QtCore.QRect(10, 10, 200, 200))
 
         self.ui.buildBtn.clicked.connect(self.clickBuild)
+        self.ui.loadBtn.clicked.connect(self.clickLoad)
         self.ui.wave1GenBtn.clicked.connect(self.clickGen)
         self.ui.wave1EndBtn.clicked.connect(self.wave1End)
         self.ui.wave2GenBtn.clicked.connect(self.clickGen2)
@@ -48,10 +51,40 @@ class Program(QtWidgets.QMainWindow):
         self.ui.stackedWidget.setCurrentIndex(1)
 
     """
+    clickBuild()
+    Populates the character sheet with the contents of the given JSON file.
+    Saves the data from the JSON in the program class as well for later use.
+    """
+    def clickLoad(self):
+        infile = Qt.QFileDialog.getOpenFileName(caption='Open Character JSON', filter='JSON Files (*.json)')
+        print(infile)
+        with open(infile[0]) as f:
+            data = json.load(f)
+
+        self.ui.nameLbl.setText(data['name'])
+        self.name = data['name']
+        self.ui.classLbl.setText(data['class'])
+        self.cls = data['cls']
+        self.ui.raceLbl.setText(data['race'])
+        self.race = data['race']
+        self.ui.ageLbl.setText(data['age'])
+        self.age = data['age']
+        for i in range(6):
+            self.ui.statTable.setItem(i,1,QtWidgets.QTableWidgetItem(str(data['stats'][i])))
+        self.stats = data['stats']
+        for i in range(26):
+            self.ui.skillTable.setItem(i,1,QtWidgets.QTableWidgetItem(str(data['skills'][i])))
+        self.skills = data['skills']
+        self.ui.bckgrndText.insertPlainText(data['story'])
+        self.traits = data['traits']
+        self.ui.stackedWidget.setCurrentIndex(7)
+
+    """
     clickGen()
     Takes the user's input of name, strengths, and weaknesses and passes it forward.
     Populates three QTableWidgets with generated statblocks.
     """
+    #TODO: add gender
     def clickGen(self):
         # get character name
         self.name = self.ui.nameEdit.text()
@@ -272,23 +305,34 @@ class Program(QtWidgets.QMainWindow):
     Takes the contents of the character sheet and writes it to a text file.
     """
     def exportCharacter(self):
-        with open('{}.txt'.format(self.name), 'w') as outfile:
-            outfile.write("Name: {}".format(self.name))
-            outfile.write("Race: {}".format(self.race))
-            outfile.write("Class: {}".format(self.cls))
-            outfile.write("Age: {}\n".format(self.age))
+        #with open('{}.txt'.format(self.name), 'w') as outfile:
+        #    outfile.write("Name: {}".format(self.name))
+        #    outfile.write("Race: {}".format(self.race))
+        #    outfile.write("Class: {}".format(self.cls))
+        #    outfile.write("Age: {}\n".format(self.age))
             
-            outfile.write("Stats:")
-            for i in range(6):
-                outfile.write(self.ui.statTable.item(i,0).text() + ': ' + str(self.stats[i]) + ' ')
+        #    outfile.write("Stats:")
+        #    for i in range(6):
+        #        outfile.write(self.ui.statTable.item(i,0).text() + ': ' + str(self.stats[i]) + ' ')
 
-            outfile.write("\nSkills:")
-            for i in range(len(self.skills)):
-                outfile.write(self.ui.skillTable.item(i,0).text() + ': ' + self.ui.skillTable.item(i,1).text() + ' ')
+        #    outfile.write("\nSkills:")
+        #    for i in range(len(self.skills)):
+        #        outfile.write(self.ui.skillTable.item(i,0).text() + ': ' + self.ui.skillTable.item(i,1).text() + ' ')
 
-            outfile.write('\n' + self.ui.bckgrndText.toPlainText())
+        #    outfile.write('\n' + self.ui.bckgrndText.toPlainText())
 
-        Qt.QMessageBox.about(self,'Notice','Character data written to {}.txt'.format(self.name))
+        with open('{}.json'.format(self.name), 'w') as outfile:
+            j = {'name':self.name,
+                 'race':self.race,
+                 'class':self.cls,
+                 'age':self.age,
+                 'traits':self.traits,
+                 'stats':self.stats,
+                 'skills':self.skills,
+                 'story':self.ui.bckgrndText.toPlainText()}
+            outfile.write(json.dumps(j))
+
+        Qt.QMessageBox.about(self,'Notice','Character data written to {}.json'.format(self.name))
 
     """
     restart()
